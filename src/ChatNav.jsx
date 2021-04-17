@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
@@ -39,22 +39,9 @@ const StyledChatNav = styled.div`
     padding-left: 25px;
   }
 
-  nav a p {
-    text-decoration: none;
-  }
   section {
     width: 100%;
     background-color: #ffffff;
-  }
-  section > header {
-    color: #ffffff;
-    padding: 10px;
-  }
-  section > header > h1 {
-    font-size: 2em;
-  }
-  section > header .description {
-    font-style: italic;
   }
 `;
 
@@ -70,11 +57,12 @@ const defaultProps = {
 };
 
 function ChatNav({ match, rooms, getRooms }) {
-  const { roomId } = match.params;
+  const { userName } = match.params;
+  const [roomId, setRoomId] = useState(0);
 
     // load the list of rooms
-    useEffect(() => { getRooms(); }, 
-    [getRooms]);
+    useEffect(() => { getRooms({roomId}); }, 
+    [getRooms], roomId);
 
   return (
     <StyledChatNav>
@@ -83,9 +71,7 @@ function ChatNav({ match, rooms, getRooms }) {
           <p id="myname">Maura Joglekar</p>
           <p id="elapsed">Online for 1 minutes</p>
         </div>
-        {rooms.map(room =>  <NavLink key={room.id} to={`room/${room.id}`}>
-          <p>{room.name}</p>
-        </NavLink>)}
+        {rooms.map(room => <p onClick={() => setRoomId(room.id)}>{room.name}</p>)}
       </nav>
       <section>
         <ChatContent roomId={roomId ? roomId : 0} />

@@ -4,12 +4,15 @@ import chatClient from '../apis/chatClient';
 import { takeLatest, put, call, fork, all, select } from "redux-saga/effects";
 
 
-export function* getRoomsSaga() {
+export function* getRoomsSaga({roomId}) {
     try {
         const response = yield call(
             [chatClient, chatClient.getRooms]
           );
         yield put(actions.setRooms(response.data));
+
+        yield call(getRoomSaga, {roomId});
+
     } catch (response) {
         console.log('Error getting rooms');
     }
@@ -40,7 +43,7 @@ export function* getRoomSaga({roomId}) {
         const { name, users } = roomResponse.data;
         selectedRoom.users = users;
         selectedRoom.name = name;
-
+        
         // save the new room info in the state
         yield put(actions.setRooms(selectedRoom));
 
@@ -52,6 +55,7 @@ export function* getRoomSaga({roomId}) {
 function* watchGetRoom() {
     yield takeLatest(types.GET_ROOM, getRoomSaga);
 }
+
 // ------------ Watch Sagas ---------------
 export default function* watchChat() {
     yield all([fork(watchGetRooms)]);
