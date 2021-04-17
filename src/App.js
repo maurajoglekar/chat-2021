@@ -7,7 +7,7 @@ function App() {
   return (    
   <BrowserRouter>
     <Route exact component={Login} path='/'/>
-    <Route component={ChatNav} path='/chat'/>
+    <Route component={ChatNav} path='/chat/:userName'/>
   </BrowserRouter>
   );
 }

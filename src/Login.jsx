@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
 
 const StyledLogin = styled.div`
 
@@ -35,29 +36,42 @@ export const propTypes = {
     history: PropTypes.object.isRequired
 };
 
-function Login({ history }) {
+class Login extends Component {
 
-    const gotoChat = obj => { history.push(`chat`) };
-    return (
-        <StyledLogin>
-            <div className="App-header">
-                <form id="login-form" onSubmit={(obj) => gotoChat(obj)}>
-                    <div>
-                        <input
-                            id="userName"
-                            name="userName"
-                            type="text"
-                            placeholder="Type your username..."
-                            ref={() => null}
-                        />
-                    </div>
-                    <button type="submit" onClick={() => null}>
-                        Join the DoorDash Chat!
+    constructor() {
+        super();
+
+        this.gotoChat = this.gotoChat.bind(this);
+    }
+
+    gotoChat(event) {
+        if (this._userName.value !== "") {
+            this.props.history.push(`chat/${this._userName.value}`)
+        }
+    };
+
+    render() {
+        return (
+            <StyledLogin>
+                <div className="App-header">
+                    <form id="login-form">
+                        <div>
+                            <input
+                                id="userName"
+                                name="userName"
+                                type="text"
+                                placeholder="Type your username..."
+                                ref={a => (this._userName = a)}
+                            />
+                        </div>
+                        <button type="submit" onClick={this.gotoChat}>
+                            Join the DoorDash Chat!
                     </button>
-                </form>
-            </div>
-        </StyledLogin>
-    );
+                    </form>
+                </div>
+            </StyledLogin>
+        );
+    }
 }
 
 Login.propTypes = propTypes;

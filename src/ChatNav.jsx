@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import { NavLink } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import ChatContent from './ChatContent';
 import { connect } from "react-redux";
@@ -68,7 +68,7 @@ function ChatNav({ match, rooms, getRooms }) {
     <StyledChatNav>
       <nav>
         <div id="personal">
-          <p id="myname">Maura Joglekar</p>
+          <p id="myname">{userName}</p>
           <p id="elapsed">Online for 1 minutes</p>
         </div>
         {rooms.map(room => <p onClick={() => setRoomId(room.id)}>{room.name}</p>)}
@@ -91,4 +91,4 @@ const mapStateToProps = ({rooms}) => {
 
 export default connect(mapStateToProps, {
   getRooms: getRoomsAction
-})(ChatNav);
+})(withRouter(ChatNav));
