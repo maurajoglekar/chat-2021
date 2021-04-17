@@ -48,28 +48,46 @@ const StyledChatNav = styled.div`
 const propTypes = {
   match: PropTypes.object.isRequired,
   rooms: PropTypes.array,
+  startTime: PropTypes.Date,
   getRooms: PropTypes.function
 };
 
 const defaultProps = {
   rooms: [],
+  startTime: new Date(),
   getRooms: () => null
 };
 
-function ChatNav({ match, rooms, getRooms }) {
+function ChatNav({ match, rooms, getRooms, startTime }) {
   const { userName } = match.params;
   const [roomId, setRoomId] = useState(0);
+  const [elapsedMins, setMins] = useState(0);
+  
+  //let elapsedMins = 0;
+  function getNewTime(){
+    const endTime = new Date();
+    let timeDiff = endTime - startTime;
+    console.log('getting new time');
+
+    // get elapsed minutes
+    const newMins = Math.floor(timeDiff / 60000);
+
+    setMins(newMins);
+  };
+
+  setInterval(getNewTime, 60000);
 
     // load the list of rooms
     useEffect(() => { getRooms({roomId}); }, 
     [getRooms], roomId);
+    
 
   return (
     <StyledChatNav>
       <nav>
         <div id="personal">
           <p id="myname">{userName}</p>
-          <p id="elapsed">Online for 1 minutes</p>
+          <p id="elapsed">Online for {elapsedMins} minutes</p>
         </div>
         {rooms.map(room => <p onClick={() => setRoomId(room.id)}>{room.name}</p>)}
       </nav>
