@@ -41,7 +41,7 @@ function ChatContent({ roomId, getRoom, rooms }) {
 
   // load the selected room
   useEffect(() => { getRoom({ roomId }); },
-    [getRoom, roomId, rooms]);
+    [getRoom, roomId]);
 
   const selectedRoom = rooms.find(room => room.id === roomId);
   const name = selectedRoom && selectedRoom.name ? selectedRoom.name : '';

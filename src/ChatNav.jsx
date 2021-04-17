@@ -78,7 +78,6 @@ function ChatNav({ match, rooms, getRooms, startTime }) {
 
     setMins(newMins);
   };
-
   setInterval(getNewTime, 60000);
 
     // load the list of rooms
@@ -86,6 +85,9 @@ function ChatNav({ match, rooms, getRooms, startTime }) {
     [getRooms], roomId);
     
 
+  const sortedRooms = rooms.sort(function (a, b) {
+    return "".concat(a.name).localeCompare(b.name);
+  });
   return (
     <StyledChatNav>
       <nav>
@@ -93,7 +95,7 @@ function ChatNav({ match, rooms, getRooms, startTime }) {
           <p id="myname">{userName}</p>
           <p id="elapsed">Online for {elapsedMins} minutes</p>
         </div>
-        {rooms.map(room => <p className={room.id === roomId ? 'selectedRoom' : ''} key={room.id} onClick={() => setRoomId(room.id)}>{room.name}</p>)}
+        {sortedRooms.map(room => <p className={room.id === roomId ? 'selectedRoom' : ''} key={room.id} onClick={() => setRoomId(room.id)}>{room.name}</p>)}
       </nav>
       <section>
         <ChatContent roomId={roomId ? roomId : 0} />

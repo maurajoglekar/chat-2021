@@ -1,7 +1,7 @@
 import * as types from './types';
 import * as actions from './actions';
 import chatClient from '../apis/chatClient';
-import { takeLatest, put, call, fork, all, select } from "redux-saga/effects";
+import { takeEvery, put, call, fork, all, select } from "redux-saga/effects";
 
 
 export function* getRoomsSaga({roomId}) {
@@ -9,9 +9,8 @@ export function* getRoomsSaga({roomId}) {
         const response = yield call(
             [chatClient, chatClient.getRooms]
           );
-        yield put(actions.setRooms(response.data));
 
-        yield call(getRoomSaga, {roomId});
+        yield put(actions.setRooms(response.data));
 
     } catch (response) {
         console.log('Error getting rooms');
@@ -19,33 +18,19 @@ export function* getRoomsSaga({roomId}) {
 }
 
 function* watchGetRooms() {
-    yield takeLatest(types.GET_ROOMS, getRoomsSaga);
+    yield takeEvery(types.GET_ROOMS, getRoomsSaga);
 }
 
 export function* getRoomSaga({roomId}) {
     try {
 
-        // call the APIs to get the room users and messages
         const roomResponse = yield call(
             [chatClient, chatClient.getRoom],
             roomId
         );
-        const messagesResponse = yield call(
-            [chatClient, chatClient.getRoomMessages],
-            roomId
-        );
 
-        // create a new selected room object
-        const rooms = yield select(rooms);
-        const selectedRoom = rooms.find(
-            room => room.id === roomId);
-        selectedRoom.messages = messagesResponse.data;
-        const { name, users } = roomResponse.data;
-        selectedRoom.users = users;
-        selectedRoom.name = name;
-        
         // save the new room info in the state
-        yield put(actions.setRooms(selectedRoom));
+        yield put(actions.setRooms([roomResponse.data]));
 
     } catch (response) {
         console.log('Error getting room');
@@ -53,11 +38,54 @@ export function* getRoomSaga({roomId}) {
 }
 
 function* watchGetRoom() {
-    yield takeLatest(types.GET_ROOM, getRoomSaga);
+    yield takeEvery(types.GET_ROOM, getRoomSaga);
+}
+
+export function* getRoomMessagesSaga({roomId}) {
+    try {
+
+        const roomResponse = yield call(
+            [chatClient, chatClient.getRoomMessages],
+            roomId
+        );
+
+        // save the new room info in the state
+        yield put(actions.setRoomMessages(roomResponse.data));
+
+    } catch (response) {
+        console.log('Error getting room');
+    }
+}
+
+function* watchGetRoomMessages() {
+    yield takeEvery(types.GET_ROOM_MESSAGES, getRoomMessagesSaga);
+}
+
+export function* addRoomMessageSaga({roomId, name, message}) {
+    try {
+
+        const response = yield call(
+            [chatClient, chatClient.addRoomMessage],
+            roomId,
+            name,
+            message
+        );
+
+        yield put(actions.setRoomMessages([response.data]));
+
+    } catch (response) {
+        console.log('Error getting room');
+    }
+}
+
+function* watchAddRoomMessage() {
+    yield takeEvery(types.ADD_ROOM_MESSAGE, addRoomMessageSaga);
 }
 
 // ------------ Watch Sagas ---------------
 export default function* watchChat() {
     yield all([fork(watchGetRooms)]);
     yield all([fork(watchGetRoom)]);
+    yield all([fork(watchGetRoomMessages)]);
+    yield all([fork(watchAddRoomMessage)]);
 }
