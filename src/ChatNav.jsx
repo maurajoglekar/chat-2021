@@ -33,10 +33,15 @@ const StyledChatNav = styled.div`
   }
   nav p {
     width: 100%;
-    height: 48px;
-    margin: 10px;
+    height: 20px;
+    padding: 10px 30px;
     color: #ffffff;
     padding-left: 25px;
+    margin-left: 0px;
+  }
+
+  nav p.selectedRoom {
+    background-color: #8B0000;
   }
 
   section {
@@ -63,7 +68,6 @@ function ChatNav({ match, rooms, getRooms, startTime }) {
   const [roomId, setRoomId] = useState(0);
   const [elapsedMins, setMins] = useState(0);
   
-  //let elapsedMins = 0;
   function getNewTime(){
     const endTime = new Date();
     let timeDiff = endTime - startTime;
@@ -89,7 +93,7 @@ function ChatNav({ match, rooms, getRooms, startTime }) {
           <p id="myname">{userName}</p>
           <p id="elapsed">Online for {elapsedMins} minutes</p>
         </div>
-        {rooms.map(room => <p onClick={() => setRoomId(room.id)}>{room.name}</p>)}
+        {rooms.map(room => <p className={room.id === roomId ? 'selectedRoom' : ''} key={room.id} onClick={() => setRoomId(room.id)}>{room.name}</p>)}
       </nav>
       <section>
         <ChatContent roomId={roomId ? roomId : 0} />
