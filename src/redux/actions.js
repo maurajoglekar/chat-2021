@@ -12,3 +12,17 @@ export function setRooms(payload) {
     payload
   };
 }
+
+export function getRoom({roomId}) {
+  return {
+    type: types.GET_ROOM,
+    roomId
+  };
+}
+
+export function setRoom(payload) {
+  return {
+    type: types.SET_ROOM,
+    payload
+  };
+}

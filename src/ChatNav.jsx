@@ -70,7 +70,7 @@ const defaultProps = {
 };
 
 function ChatNav({ match, rooms, getRooms }) {
-  const { room } = match.params;
+  const { roomId } = match.params;
 
     // load the list of rooms
     useEffect(() => { getRooms(); }, 
@@ -83,12 +83,12 @@ function ChatNav({ match, rooms, getRooms }) {
           <p id="myname">Maura Joglekar</p>
           <p id="elapsed">Online for 1 minutes</p>
         </div>
-        {rooms.map(room =>  <NavLink to={`room/${room.id}`}>
+        {rooms.map(room =>  <NavLink key={room.id} to={`room/${room.id}`}>
           <p>{room.name}</p>
         </NavLink>)}
       </nav>
       <section>
-        <ChatContent/>
+        <ChatContent roomId={roomId ? roomId : 0} />
       </section>
     </StyledChatNav>
   );

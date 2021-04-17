@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
-import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
-
+import { connect } from "react-redux";
+import {
+  getRoom as getRoomAction
+} from './redux/actions';
 const StyledChatContent = styled.div`
 
 section#title {
@@ -25,13 +27,25 @@ section#addMessage {
 `;
 
 const propTypes = {
-  room: PropTypes.number
+  roomId: PropTypes.number,
+  rooms: PropTypes.array,
+  getRoom: PropTypes.function
 };
 
 const defaultProps = {
+  rooms: [],
+  getRoom: () => null
 };
 
-function ChatContent({ room }) {
+function ChatContent({ roomId, getRoom, rooms }) {
+
+  // load the selected room
+  useEffect(() => { getRoom({ roomId }); },
+    [getRoom, roomId, rooms]);
+
+  const selectedRoom = rooms.find(room => room.id === roomId);
+  const name = selectedRoom && selectedRoom.name ? selectedRoom.name : '';
+  const users = selectedRoom && selectedRoom.users ? selectedRoom.users.join(', ') : '';
 
   return (
     <StyledChatContent>
@@ -52,4 +66,12 @@ function ChatContent({ room }) {
 ChatContent.propTypes = propTypes;
 ChatContent.defaultProps = defaultProps;
 
-export default ChatContent;
+const mapStateToProps = ({ rooms }) => {
+  return {
+    rooms: rooms || []
+  }
+};
+
+export default connect(mapStateToProps, {
+  getRoom: getRoomAction
+})(ChatContent);
