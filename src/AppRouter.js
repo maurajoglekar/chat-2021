@@ -1,9 +1,9 @@
 import React from 'react';
-import { Route, BrowserRouter, Redirect } from 'react-router-dom';
-import ChatNav from './ChatNav';
-import Login from './Login';
+import { Route, BrowserRouter } from 'react-router-dom';
+import ChatNav from './container/ChatNav';
+import Login from './views/LoginForm';
 
-function App() {
+function AppRouter() {
   return (    
   <BrowserRouter>
     <Route exact component={Login} path='/'/>
@@ -12,4 +12,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppRouter;

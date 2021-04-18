@@ -74,7 +74,11 @@ export function* addRoomMessageSaga({roomId, name, message}) {
             message
         );
 
-        yield put(actions.setRoomMessages([response.data]));
+        const objWithMessage = {
+            message: response.data,
+            roomId
+        };
+        yield put(actions.setRoomMessage(objWithMessage));
 
     } catch (response) {
         console.log('Error getting room');

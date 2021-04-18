@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import React, { Component } from "react";
 
-const StyledLogin = styled.div`
+const StyledLoginForm = styled.div`
 
 .app-header {
     background-color: #FFF;
@@ -36,7 +36,7 @@ export const propTypes = {
     history: PropTypes.object.isRequired
 };
 
-class Login extends Component {
+class LoginForm extends Component {
 
     constructor() {
         super();
@@ -52,7 +52,7 @@ class Login extends Component {
 
     render() {
         return (
-            <StyledLogin>
+            <StyledLoginForm>
                 <div className="app-header">
                     <form id="login-form">
                         <div>
@@ -69,11 +69,11 @@ class Login extends Component {
                     </button>
                     </form>
                 </div>
-            </StyledLogin>
+            </StyledLoginForm>
         );
     }
 }
 
-Login.propTypes = propTypes;
+LoginForm.propTypes = propTypes;
 
-export default withRouter(Login);
+export default withRouter(LoginForm);

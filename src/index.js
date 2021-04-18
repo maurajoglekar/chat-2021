@@ -4,11 +4,11 @@ import { Provider } from "react-redux";
 import store from "./configureStore";
 
 import './index.css';
-import App from './App';
+import AppRouter from './AppRouter';
 
 const AppWrapper = () => (
   <Provider store={store}>
-    <App />
+    <AppRouter />
   </Provider>
 );
 

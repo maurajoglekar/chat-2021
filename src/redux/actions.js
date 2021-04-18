@@ -35,16 +35,18 @@ export function getRoomMessages({roomId}) {
   };
 }
 
-export function addRoomMessage(payload) {
+export function addRoomMessage({roomId, name, message}) {
   return {
     type: types.ADD_ROOM_MESSAGE,
-    payload
+    roomId,
+    name, 
+    message
   };
 }
 
-export function setRoomMessages(payload) {
+export function setRoomMessage(payload) {
   return {
-    type: types.SET_ROOM_MESSAGES,
+    type: types.SET_ROOM_MESSAGE,
     payload
   };
 }

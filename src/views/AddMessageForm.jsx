@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import React, { Component } from "react";
 
@@ -34,27 +33,33 @@ class AddMessageForm extends Component {
     }
 
     addMessage() {
-        const { userName, addRoomMessage } = this.props;
+        const { userName, addRoomMessage, roomId, messagesEndElem } = this.props;
         if (this._newMessage.value !== "") {
-            addRoomMessage({name : userName, message: this._newMessage.value})
+            addRoomMessage({ roomId, name: userName, message: this._newMessage.value })
+            // this.messagesEndElem.scrollIntoView({ behavior: "smooth" });
         }
     };
 
     render() {
         return (
-            <StyledAddMessageForm>
+            <StyledAddMessageForm ref={(el) => { this.messagesEndElem = el; }}>
                 <form id="add-message-form">
-                        <input
-                            id="message"
-                            name="message"
-                            type="text"
-                            placeholder="Type a message..."
-                            ref={a => (this._newMessage = a)}
-                        />
+                    <input
+                        id="message"
+                        name="message"
+                        type="text"
+                        placeholder="Type a message..."
+                        ref={a => (this._newMessage = a)}
+                    />
                     <button type="submit" onClick={this.addMessage}>
                         Send
                     </button>
                 </form>
+                {/* 
+                                <div className="messagesEnd" style={{ float: "left", clear: "both" }}
+                    ref={(el) => { this.messagesEndElem = el; }}>
+                </div>
+                */}
             </StyledAddMessageForm>
         );
     }

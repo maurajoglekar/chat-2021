@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import ChatContent from './ChatContent';
+import ChatContent from '../views/ChatContent';
 import { connect } from "react-redux";
 import {
   getRooms as getRoomsAction,
   getRoom as getRoomAction,
   getRoomMessages as getRoomMessagesAction,
   addRoomMessage as addRoomMessageAction
-} from './redux/actions';
+} from '../redux/actions';
 
 const StyledChatNav = styled.div`
   display: flex;

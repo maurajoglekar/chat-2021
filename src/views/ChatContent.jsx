@@ -16,9 +16,10 @@ section#title {
 } 
 
 section#messages {
-  height: calc(100vh - 290px);
+  max-height: calc(100vh - 250px);
   background-color: #f5f5f5;
-;
+  overflow-y: scroll;
+  overflow-x: hidden;
 } 
 
 section#addMessage {
@@ -55,6 +56,7 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoo
   useEffect(() => { getRoomMessages({ roomId }); },
     [getRoomMessages, roomId]);
 
+
   const selectedRoom = rooms.find(room => room.id === roomId);
   const name = selectedRoom && selectedRoom.name ? selectedRoom.name : '';
   const users = selectedRoom && selectedRoom.users ? selectedRoom.users.join(', ') : '';
@@ -72,7 +74,7 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoo
         <MessageList messages={messages} userName={userName}></MessageList>
       </section>
       <section id="addMessage">
-        <AddMessageForm userName={userName} addRoomMessage={addRoomMessage}></AddMessageForm>
+        <AddMessageForm userName={userName} addRoomMessage={addRoomMessage} roomId={roomId}></AddMessageForm>
       </section>
     </StyledChatContent>
   );
