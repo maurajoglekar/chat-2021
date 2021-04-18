@@ -48,9 +48,12 @@ export function* getRoomMessagesSaga({roomId}) {
             [chatClient, chatClient.getRoomMessages],
             roomId
         );
+        const roomObjWithMessages = {
+            messages: roomResponse.data,
+            id: roomId
+        };
 
-        // save the new room info in the state
-        yield put(actions.setRoomMessages(roomResponse.data));
+        yield put(actions.setRooms([roomObjWithMessages]));
 
     } catch (response) {
         console.log('Error getting room');
