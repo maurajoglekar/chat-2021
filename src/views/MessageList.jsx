@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledMessageList = styled.div`
-ul.theList {
+ul.messageList {
     list-style: none;
     padding-left: 0;
     margin-left: 30px;
@@ -42,7 +42,7 @@ const propTypes = {
 export function MessageList({ messages, userName }) {
     return (
         <StyledMessageList>
-            <ul className="theList">
+            <ul className="messageList">
                 {messages.map((m) => (
                     <StyledListItem key={m.id} isMine={userName === m.name}>
                         <p className="messageText">{m.message}</p>
