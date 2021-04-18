@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 import {
   getRooms as getRoomsAction,
   getRoom as getRoomAction,
-  getRoomMessages as getRoomMessagesAction
+  getRoomMessages as getRoomMessagesAction,
+  addRoomMessage as addRoomMessageAction
 } from './redux/actions';
 
 const StyledChatNav = styled.div`
@@ -58,7 +59,8 @@ const propTypes = {
   startTime: PropTypes.Date,
   getRooms: PropTypes.function,
   getRoom: PropTypes.function,
-  getRoomMessages: PropTypes.function
+  getRoomMessages: PropTypes.function,
+  addRoomMessage: PropTypes.function
 };
 
 const defaultProps = {
@@ -66,10 +68,11 @@ const defaultProps = {
   startTime: new Date(),
   getRooms: () => null,
   getRoom: () => null,
-  getRoomMessages: () => null
+  getRoomMessages: () => null,
+  addRoomMessage: () => null
 };
 
-function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages }) {
+function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, addRoomMessage }) {
   const { userName } = match.params;
   const [roomId, setRoomId] = useState(0);
   const [elapsedMins, setMins] = useState(0);
@@ -104,7 +107,7 @@ function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages }
         {sortedRooms.map(room => <p className={room.id === roomId ? 'selectedRoom' : ''} key={room.id} onClick={() => setRoomId(room.id)}>{room.name}</p>)}
       </nav>
       <section>
-        <ChatContent userName={userName} roomId={roomId ? roomId : 0} getRoom={getRoom} getRoomMessages={getRoomMessages} rooms={rooms}/>
+        <ChatContent userName={userName} roomId={roomId ? roomId : 0} getRoom={getRoom} getRoomMessages={getRoomMessages} rooms={rooms} addRoomMessage={addRoomMessage} />
       </section>
     </StyledChatNav>
   );
@@ -122,5 +125,6 @@ const mapStateToProps = ({rooms}) => {
 export default connect(mapStateToProps, {
   getRooms: getRoomsAction,
   getRoom: getRoomAction,
-  getRoomMessages: getRoomMessagesAction
+  getRoomMessages: getRoomMessagesAction,
+  addRoomMessage: addRoomMessageAction
 })(withRouter(ChatNav));

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MessageList from './MessageList';
+import AddMessageForm from "./AddMessageForm";
 
 const StyledChatContent = styled.div`
 
@@ -32,17 +33,19 @@ const propTypes = {
   rooms: PropTypes.array,
   getRoom: PropTypes.function,
   getRoomMessages: PropTypes.function,
-  userName: PropTypes.string
+  userName: PropTypes.string,
+  addRoomMessage: PropTypes.function
 };
 
 const defaultProps = {
   rooms: [],
   getRoom: () => null,
   getRoomMessages: () => null,
-  userName: ''
+  userName: '',
+  addRoomMessage: () => null
 };
 
-function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName }) {
+function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoomMessage }) {
 
   // load the selected room
   useEffect(() => { getRoom({ roomId }); },
@@ -69,7 +72,7 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName }) {
         <MessageList messages={messages} userName={userName}></MessageList>
       </section>
       <section id="addMessage">
-        <p>input box and button</p>
+        <AddMessageForm userName={userName} addRoomMessage={addRoomMessage}></AddMessageForm>
       </section>
     </StyledChatContent>
   );

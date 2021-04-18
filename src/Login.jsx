@@ -44,7 +44,7 @@ class Login extends Component {
         this.gotoChat = this.gotoChat.bind(this);
     }
 
-    gotoChat(event) {
+    gotoChat() {
         if (this._userName.value !== "") {
             this.props.history.push(`chat/${this._userName.value}`)
         }
@@ -75,4 +75,5 @@ class Login extends Component {
 }
 
 Login.propTypes = propTypes;
+
 export default withRouter(Login);
