@@ -18,10 +18,11 @@ const StyledListItem = styled.li`
     color: ${props => !props.isMine && '#333'};
     background-color: ${props => props.isMine && '#FF3008'};
     background-color: ${props => !props.isMine && '#fff'};;
-    padding: 5px 10px 5px;
+    padding: 15px 20px;
     margin-bottom: 10px;
     border-radius: 10px;
     max-width: ${props => !props.isMine && '50%'};
+    width: max-content;
     float: ${props => props.isMine && 'right'};
   }
 
