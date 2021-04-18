@@ -20,6 +20,7 @@ section#messages {
   background-color: #f5f5f5;
   overflow-y: scroll;
   overflow-x: hidden;
+  min-height: calc(100vh - 250px);
 } 
 
 section#addMessage {

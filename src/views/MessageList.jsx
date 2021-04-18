@@ -21,7 +21,7 @@ const StyledListItem = styled.li`
     padding: 5px 10px 5px;
     margin-bottom: 10px;
     border-radius: 10px;
-    max-width: ${props => !props.isMine && '250px'};
+    max-width: ${props => !props.isMine && '50%'};
     float: ${props => props.isMine && 'right'};
   }
 

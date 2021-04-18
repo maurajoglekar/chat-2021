@@ -33,16 +33,15 @@ class AddMessageForm extends Component {
     }
 
     addMessage() {
-        const { userName, addRoomMessage, roomId, messagesEndElem } = this.props;
+        const { userName, addRoomMessage, roomId } = this.props;
         if (this._newMessage.value !== "") {
             addRoomMessage({ roomId, name: userName, message: this._newMessage.value })
-            // this.messagesEndElem.scrollIntoView({ behavior: "smooth" });
         }
     };
 
     render() {
         return (
-            <StyledAddMessageForm ref={(el) => { this.messagesEndElem = el; }}>
+            <StyledAddMessageForm>
                 <form id="add-message-form">
                     <input
                         id="message"
@@ -55,11 +54,6 @@ class AddMessageForm extends Component {
                         Send
                     </button>
                 </form>
-                {/* 
-                                <div className="messagesEnd" style={{ float: "left", clear: "both" }}
-                    ref={(el) => { this.messagesEndElem = el; }}>
-                </div>
-                */}
             </StyledAddMessageForm>
         );
     }
