@@ -23,12 +23,13 @@ const StyledChatNav = styled.div`
     font-weight: bold;
     font-size: 20px;
     margin-top: 30px;
-    height: 22px;
+    margin-bottom: -10px;
+    height: 10px;
   }
   p#elapsed {
     font-size: 12px;
     height: 14px;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
   }
   nav {
     min-width: 200px;
@@ -36,7 +37,7 @@ const StyledChatNav = styled.div`
   }
   nav p {
     width: 100%;
-    height: 20px;
+    height: 30px;
     padding: 10px 30px;
     color: #ffffff;
     padding-left: 25px;

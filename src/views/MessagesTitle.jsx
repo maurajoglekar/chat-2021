@@ -13,6 +13,12 @@ const StyledMessagesTitle = styled.div`
   }
 `;
 
+const StyledUsersList = styled.div`
+span.my-name {
+    color: red;
+}
+`;
+
 const propTypes = {
     name: PropTypes.string.isRequired,
     users: PropTypes.array.isRequired,
@@ -20,23 +26,24 @@ const propTypes = {
 };
 
 const usersList = (me, others) => (
-    <div>
-        <span>{me}</span>
+    <StyledUsersList>
+        <span className="my-name">{me}</span>
+        {me && me.length > 0 && <span>, </span>}
         <span>{others}</span>
-    </div>
+    </StyledUsersList>
 );
 
 export function MessagesTitle({ name, users, userName }) {
 
-    const myIndex = users.indexOf(userName);
-    const inRoom = myIndex !== -1;
-    let me = userName;
-    let others = '';
+    let me, others = '';
+    let temp = users.filter(user => user !== userName);
     
-    if (inRoom) {
-        delete users[myIndex];
+    if (temp.length == users.length) {
+        others = users.join(', ');
+    } else {
+        me = userName;
+        others = temp.join(', ')
     }
-    others = users.join(', ');
 
     return (
         <StyledMessagesTitle>

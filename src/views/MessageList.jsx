@@ -26,7 +26,7 @@ justify-content: ${props => props.isMine ? 'flex-end' : 'flex-start'};
     background-color: ${props => props.isMine ? '#FF3008' : '#fff'};
     padding: 15px 20px;
     margin-bottom: 10px;
-    border-radius: ${props => !props.isMine ? '10px 100px / 120px' : '2em'};
+    border-radius: 2em;
   }
 
 .messageItem  .messagedBy {
@@ -34,7 +34,6 @@ justify-content: ${props => props.isMine ? 'flex-end' : 'flex-start'};
     padding: 5px 10px 5px;
     margin-bottom: 10px;
     border-radius: 30px;
-    font-size: 12px;
   }
 `;
 
