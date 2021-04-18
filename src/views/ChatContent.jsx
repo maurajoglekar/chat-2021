@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MessageList from './MessageList';
-import AddMessageForm from "./AddMessageForm";
+import MessageAddForm from "./MessageAddForm";
+import MessagesTitle from "./MessagesTitle"
 
 const StyledChatContent = styled.div`
 
@@ -13,10 +14,6 @@ const StyledChatContent = styled.div`
   border-bottom: 1px solid #E0E0E0;
   color: gray;
 } 
-
-.titleSection .center {
-  text-align: center;
-}
 
 .messagesSection {
   max-height: calc(100vh - 250px);
@@ -63,20 +60,19 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoo
 
   const selectedRoom = rooms.find(room => room.id === roomId);
   const name = selectedRoom && selectedRoom.name ? selectedRoom.name : '';
-  const users = selectedRoom && selectedRoom.users ? selectedRoom.users.join(', ') : '';
+  const users = selectedRoom && selectedRoom.users ? selectedRoom.users : [];
   const messages = selectedRoom && selectedRoom.messages ? selectedRoom.messages : [];
 
   return (
     <StyledChatContent>
       <section className="titleSection">
-          <p className="center">{name}</p>
-          <p className="center">{users}</p>
+        <MessagesTitle name={name} users={users} userName={userName}></MessagesTitle>
       </section>
       <section className="messagesSection">
         <MessageList messages={messages} userName={userName}></MessageList>
       </section>
       <section className="addMessageSection">
-        <AddMessageForm userName={userName} addRoomMessage={addRoomMessage} roomId={roomId}></AddMessageForm>
+        <MessageAddForm userName={userName} addRoomMessage={addRoomMessage} roomId={roomId}></MessageAddForm>
       </section>
     </StyledChatContent>
   );

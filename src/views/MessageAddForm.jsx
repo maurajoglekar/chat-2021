@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { Component } from "react";
 
-const StyledAddMessageForm = styled.div`
+const StyledMessageAddForm = styled.div`
 form input {
     width: 80%;
     margin: 50px 30px;
@@ -24,7 +24,7 @@ form button {
 }
 `;
 
-class AddMessageForm extends Component {
+class MessageAddForm extends Component {
 
     constructor() {
         super();
@@ -41,7 +41,7 @@ class AddMessageForm extends Component {
 
     render() {
         return (
-            <StyledAddMessageForm>
+            <StyledMessageAddForm>
                 <form id="add-message-form">
                     <input
                         id="message"
@@ -54,10 +54,10 @@ class AddMessageForm extends Component {
                         Send
                     </button>
                 </form>
-            </StyledAddMessageForm>
+            </StyledMessageAddForm>
         );
     }
 }
 
 
-export default AddMessageForm;
+export default MessageAddForm;
