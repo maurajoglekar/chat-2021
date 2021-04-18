@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import ChatContent from './ChatContent';
 import { connect } from "react-redux";
 import {
-  getRooms as getRoomsAction
+  getRooms as getRoomsAction,
+  getRoom as getRoomAction,
+  getRoomMessages as getRoomMessagesAction
 } from './redux/actions';
 
 const StyledChatNav = styled.div`
@@ -54,16 +56,20 @@ const propTypes = {
   match: PropTypes.object.isRequired,
   rooms: PropTypes.array,
   startTime: PropTypes.Date,
-  getRooms: PropTypes.function
+  getRooms: PropTypes.function,
+  getRoom: PropTypes.function,
+  getRoomMessages: PropTypes.function
 };
 
 const defaultProps = {
   rooms: [],
   startTime: new Date(),
-  getRooms: () => null
+  getRooms: () => null,
+  getRoom: () => null,
+  getRoomMessages: () => null
 };
 
-function ChatNav({ match, rooms, getRooms, startTime }) {
+function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages }) {
   const { userName } = match.params;
   const [roomId, setRoomId] = useState(0);
   const [elapsedMins, setMins] = useState(0);
@@ -98,7 +104,7 @@ function ChatNav({ match, rooms, getRooms, startTime }) {
         {sortedRooms.map(room => <p className={room.id === roomId ? 'selectedRoom' : ''} key={room.id} onClick={() => setRoomId(room.id)}>{room.name}</p>)}
       </nav>
       <section>
-        <ChatContent roomId={roomId ? roomId : 0} />
+        <ChatContent userName={userName} roomId={roomId ? roomId : 0} getRoom={getRoom} getRoomMessages={getRoomMessages} rooms={rooms}/>
       </section>
     </StyledChatNav>
   );
@@ -114,5 +120,7 @@ const mapStateToProps = ({rooms}) => {
 };
 
 export default connect(mapStateToProps, {
-  getRooms: getRoomsAction
+  getRooms: getRoomsAction,
+  getRoom: getRoomAction,
+  getRoomMessages: getRoomMessagesAction
 })(withRouter(ChatNav));

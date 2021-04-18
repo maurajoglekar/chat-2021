@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { connect } from "react-redux";
-import {
-  getRoom as getRoomAction,
-  getRoomMessages as getRoomMessagesAction
-} from './redux/actions';
+import MessageList from './MessageList';
 
 const StyledChatContent = styled.div`
 
@@ -19,7 +15,7 @@ section#title {
 } 
 
 section#messages {
-  height: calc(100vh - 200px);
+  height: calc(100vh - 290px);
   background-color: #f5f5f5;
 ;
 } 
@@ -35,16 +31,18 @@ const propTypes = {
   roomId: PropTypes.number,
   rooms: PropTypes.array,
   getRoom: PropTypes.function,
-  getRoomMessages: PropTypes.function
+  getRoomMessages: PropTypes.function,
+  userName: PropTypes.string
 };
 
 const defaultProps = {
   rooms: [],
   getRoom: () => null,
-  getRoomMessages: () => null
+  getRoomMessages: () => null,
+  userName: ''
 };
 
-function ChatContent({ roomId, getRoom, getRoomMessages, rooms }) {
+function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName }) {
 
   // load the selected room
   useEffect(() => { getRoom({ roomId }); },
@@ -68,7 +66,7 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms }) {
         </div>
       </section>
       <section id="messages">
-        {messages.map(m => <div key={m.id} ><p >{m.message}</p><p >{m.name}</p></div>)}
+        <MessageList messages={messages} userName={userName}></MessageList>
       </section>
       <section id="addMessage">
         <p>input box and button</p>
@@ -80,13 +78,4 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms }) {
 ChatContent.propTypes = propTypes;
 ChatContent.defaultProps = defaultProps;
 
-const mapStateToProps = ({ rooms }) => {
-  return {
-    rooms: rooms || []
-  }
-};
-
-export default connect(mapStateToProps, {
-  getRoom: getRoomAction,
-  getRoomMessages: getRoomMessagesAction
-})(ChatContent);
+export default ChatContent;
