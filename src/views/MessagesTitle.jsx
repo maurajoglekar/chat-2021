@@ -19,18 +19,29 @@ const propTypes = {
     userName: PropTypes.string.isRequired
 };
 
+const usersList = (me, others) => (
+    <div>
+        <span>{me}</span>
+        <span>{others}</span>
+    </div>
+);
+
 export function MessagesTitle({ name, users, userName }) {
-    let userString = '';
+
     const myIndex = users.indexOf(userName);
-    if (myIndex === -1) {
-       userString =  users.join(', ')
-    } else {
-        const me = users.splice(myIndex, 1);
+    const inRoom = myIndex !== -1;
+    let me = userName;
+    let others = '';
+    
+    if (inRoom) {
+        delete users[myIndex];
     }
+    others = users.join(', ');
+
     return (
         <StyledMessagesTitle>
             <p className="room-title">{name}</p>
-            <p className="room-users">{userString}</p>
+            <p className="room-users">{usersList(me, others)}</p>
         </StyledMessagesTitle>
 
     );

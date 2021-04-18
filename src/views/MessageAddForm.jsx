@@ -4,7 +4,7 @@ import React, { Component } from "react";
 const StyledMessageAddForm = styled.div`
 form input {
     width: 80%;
-    margin: 50px 30px;
+    margin: 40px 30px;
     height: 30px;
     padding: 10px 25px;
     font-size: 16px;
