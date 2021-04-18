@@ -6,16 +6,19 @@ import AddMessageForm from "./AddMessageForm";
 
 const StyledChatContent = styled.div`
 
-section#title {
-  display:flex;
-  align-items: center;
-  justify-content: center;
+.titleSection {
+  display:block;
   height: 100px;
   background-color: #ffffff;
   border-bottom: 1px solid #E0E0E0;
+  color: gray;
 } 
 
-section#messages {
+.titleSection .center {
+  text-align: center;
+}
+
+.messagesSection {
   max-height: calc(100vh - 250px);
   background-color: #f5f5f5;
   overflow-y: scroll;
@@ -23,7 +26,7 @@ section#messages {
   min-height: calc(100vh - 250px);
 } 
 
-section#addMessage {
+.addMessageSection {
   height: 100px;
   background-color: #ffffff;
   border-top: 1px solid #E0E0E0;
@@ -65,16 +68,14 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoo
 
   return (
     <StyledChatContent>
-      <section id="title">
-        <div>
-          <p>{name}</p>
-          <p>{users}</p>
-        </div>
+      <section className="titleSection">
+          <p className="center">{name}</p>
+          <p className="center">{users}</p>
       </section>
-      <section id="messages">
+      <section className="messagesSection">
         <MessageList messages={messages} userName={userName}></MessageList>
       </section>
-      <section id="addMessage">
+      <section className="addMessageSection">
         <AddMessageForm userName={userName} addRoomMessage={addRoomMessage} roomId={roomId}></AddMessageForm>
       </section>
     </StyledChatContent>
