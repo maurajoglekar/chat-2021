@@ -22,7 +22,7 @@ justify-content: ${props => props.isMine ? 'flex-end' : 'flex-start'};
 }
 
 .messageItem .messageText {
-    color: ${props => props.isMine ? '#fff' : '#333'};
+    color: ${props => props.isMine ? '#FAF0E6' : 'gray'};
     background-color: ${props => props.isMine ? '#FF3008' : '#fff'};
     padding: 15px 20px;
     margin-bottom: 10px;
