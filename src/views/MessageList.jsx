@@ -13,20 +13,23 @@ ul.messageList {
 `;
 
 const StyledListItem = styled.li`
-.messageText {
-    color: ${props => props.isMine && '#fff'};
-    color: ${props => !props.isMine && '#333'};
-    background-color: ${props => props.isMine && '#FF3008'};
-    background-color: ${props => !props.isMine && '#fff'};;
+display: flex;
+justify-content: ${props => props.isMine ? 'flex-end' : 'flex-start'};
+
+.messageItem {
+    max-width: 50%;
+    width: max-content;
+}
+
+.messageItem .messageText {
+    color: ${props => props.isMine ? '#fff' : '#333'};
+    background-color: ${props => props.isMine ? '#FF3008' : '#fff'};
     padding: 15px 20px;
     margin-bottom: 10px;
-    border-radius: 10px;
-    max-width: ${props => !props.isMine && '50%'};
-    width: max-content;
-    float: ${props => props.isMine && 'right'};
+    border-radius: ${props => !props.isMine ? '10px 100px / 120px' : '2em'};
   }
 
-  .messagedBy {
+.messageItem  .messagedBy {
     color: gray;
     padding: 5px 10px 5px;
     margin-bottom: 10px;
@@ -46,8 +49,10 @@ export function MessageList({ messages, userName }) {
             <ul className="messageList">
                 {messages.map((m) => (
                     <StyledListItem key={m.id} isMine={userName === m.name}>
-                        <p className="messageText">{m.message}</p>
-                        { userName !== m.name && (<p className="messagedBy">{m.name}</p>)}
+                        <div className="messageItem">
+                            <p className="messageText">{m.message}</p>
+                            {userName !== m.name && (<p className="messagedBy">{m.name}</p>)}
+                        </div>
                     </StyledListItem>
                 ))}
             </ul>
