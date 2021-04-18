@@ -5,7 +5,7 @@ import React, { Component } from "react";
 
 const StyledLogin = styled.div`
 
-.App-header {
+.app-header {
     background-color: #FFF;
     min-height: 100vh;
     display: flex;
@@ -53,7 +53,7 @@ class Login extends Component {
     render() {
         return (
             <StyledLogin>
-                <div className="App-header">
+                <div className="app-header">
                     <form id="login-form">
                         <div>
                             <input

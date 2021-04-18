@@ -17,6 +17,7 @@ const mergeById = (arr1, arr2) => arr1.map(item => {
   return { ...item, ...obj };
 });
 */
+
 function arrayMerge(
   destinationArray,
   arrayToMerge,
@@ -40,6 +41,7 @@ function arrayMerge(
         // if we found an item with a corresponding identifier in the destination array flip our found flag
         // even if the data is not newer we don't want to append this item to the result array as it would be duplicated
         found = true;
+        return {...item, ...itemToMerge};
 
       }
       return item;
@@ -51,8 +53,6 @@ function arrayMerge(
   // return a new array composed of the newly merged destination array joined with the new items that didn't exist before
   return [...destinationCopy, ...newItems];
 }
-
-//const mergeById = (arr1, arr2) => arr2.map(x => Object.assign(x, arr1.find(y => y.id == x.id)));
 
 function reducer(state = initialState, action) {
   switch (action.type) {

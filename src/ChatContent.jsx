@@ -8,6 +8,9 @@ import {
 const StyledChatContent = styled.div`
 
 section#title {
+  display:flex;
+  align-items: center;
+  justify-content: center;
   height: 100px;
   background-color: #ffffff;
   border-bottom: 1px solid #E0E0E0;
@@ -50,8 +53,10 @@ function ChatContent({ roomId, getRoom, rooms }) {
   return (
     <StyledChatContent>
       <section id="title">
-        <p>Business</p>
-        <p> list of users</p>
+        <div>
+        <p>{name}</p>
+        <p>{users}</p>
+        </div>
       </section>
       <section id="messages">
         <p>Messages here</p>
