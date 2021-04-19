@@ -25,15 +25,16 @@ justify-content: ${props => props.isMine ? 'flex-end' : 'flex-start'};
     color: ${props => props.isMine ? '#FAF0E6' : 'gray'};
     background-color: ${props => props.isMine ? '#FF3008' : '#fff'};
     padding: 15px 20px;
-    margin-bottom: 10px;
     border-radius: 2em;
+    margin-bottom: 0;
   }
 
 .messageItem  .messagedBy {
     color: gray;
-    padding: 5px 10px 5px;
+    padding: 5px;
     margin-bottom: 10px;
     border-radius: 30px;
+    font-size: 18px;
   }
 `;
 

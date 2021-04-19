@@ -10,6 +10,7 @@ form input {
     font-size: 16px;
     color: gray;
     border: #BDBDBD solid 2px;
+    color: gray;
 }
 
 form button {

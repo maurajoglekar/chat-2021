@@ -10,6 +10,7 @@ import {
   getRoomMessages as getRoomMessagesAction,
   addRoomMessage as addRoomMessageAction
 } from '../redux/actions';
+import NavHeading from '../views/NavHeading';
 
 const StyledChatNav = styled.div`
   display: flex;
@@ -19,29 +20,19 @@ const StyledChatNav = styled.div`
     width: 100%;
   }
 
-  p#myname {
-    font-weight: bold;
-    font-size: 20px;
-    margin-top: 30px;
-    margin-bottom: -10px;
-    height: 10px;
-  }
-  p#elapsed {
-    font-size: 12px;
-    height: 14px;
-    margin-bottom: 30px;
-  }
   nav {
     min-width: 200px;
     background-color: #FF3008;
   }
+
   nav p {
     width: 100%;
     height: 30px;
     padding: 10px 30px;
     color: #ffffff;
     padding-left: 25px;
-    margin-left: 0px;
+    margin: 0;
+    height: 40px;
   }
 
   nav p.selectedRoom {
@@ -76,24 +67,23 @@ const defaultProps = {
 function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, addRoomMessage }) {
   const { userName } = match.params;
   const [roomId, setRoomId] = useState(0);
-  const [elapsedMins, setMins] = useState(0);
-  
-  function getNewTime(){
+  const [elapsedMins, setElapsedMins] = useState(0);
+
+  function getNewTime() {
     const endTime = new Date();
     let timeDiff = endTime - startTime;
-    console.log('getting new time');
 
     // get elapsed minutes
     const newMins = Math.floor(timeDiff / 60000);
 
-    setMins(newMins);
+    setElapsedMins(newMins);
   };
   setInterval(getNewTime, 60000);
 
-    // load the list of rooms
-    useEffect(() => { getRooms({roomId}); }, 
+  // load the list of rooms
+  useEffect(() => { getRooms({ roomId }); },
     [getRooms], roomId);
-    
+
 
   const sortedRooms = rooms.sort(function (a, b) {
     return "".concat(a.name).localeCompare(b.name);
@@ -101,10 +91,7 @@ function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, 
   return (
     <StyledChatNav>
       <nav>
-        <div id="personal">
-          <p id="myname">{userName}</p>
-          <p id="elapsed">Online for {elapsedMins} minutes</p>
-        </div>
+        <NavHeading userName={userName} elapsedMins={elapsedMins}></NavHeading>
         {sortedRooms.map(room => <p className={room.id === roomId ? 'selectedRoom' : ''} key={room.id} onClick={() => setRoomId(room.id)}>{room.name}</p>)}
       </nav>
       <section>
@@ -117,7 +104,7 @@ function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, 
 ChatNav.propTypes = propTypes;
 ChatNav.defaultProps = defaultProps;
 
-const mapStateToProps = ({rooms}) => {
+const mapStateToProps = ({ rooms }) => {
   return {
     rooms: rooms || []
   }
