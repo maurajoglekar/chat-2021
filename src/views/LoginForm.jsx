@@ -16,15 +16,16 @@ const StyledLoginForm = styled.div`
   }
 
   input{
-      width: 250px;
-      height: 24px;
+      width: 350px;
+      height: 30px;
       margin-top: 15px;
-      padding: 0 30px;
+      padding: 0 25px;
+      color: gray;
   }
 
   button {
-    width: 315px;
-    height: 30px;
+    width: 405px;
+    height: 36px;
     margin-top: 15px;
     background-color: #FF3008;
     color: #FFF;
