@@ -58,7 +58,7 @@ class LoginForm extends Component {
                     <form id="login-form">
                         <div>
                             <input
-                                id="userName"
+                                id="user-name"
                                 name="userName"
                                 type="text"
                                 placeholder="Type your username..."

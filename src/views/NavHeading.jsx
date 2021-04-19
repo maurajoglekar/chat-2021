@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledNavHeading = styled.div`
 
-p#myname {
+p#name {
     font-weight: bold;
     font-size: 20px;
     margin-top: 20px;
@@ -43,7 +43,7 @@ export function NavHeading({ userName, startTime }) {
     return (
         <StyledNavHeading>
             <div id="personal">
-                <p id="myname">{userName}</p>
+                <p id="name">{userName}</p>
                 <p id="elapsed">Online for {elapsedMins} minutes</p>
             </div>
         </StyledNavHeading>

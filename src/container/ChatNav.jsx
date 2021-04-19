@@ -33,7 +33,7 @@ const StyledChatNav = styled.div`
     margin: 0;
   }
 
-  nav p.selectedRoom {
+  nav p.selected-room {
     background-color: #8B0000;
   }
 
@@ -78,7 +78,7 @@ function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, 
     <StyledChatNav>
       <nav>
         <NavHeading userName={userName} startTime={startTime}></NavHeading>
-        {sortedRooms.map(room => <p className={room.id === roomId ? 'selectedRoom' : ''} key={room.id} onClick={() => setRoomId(room.id)}>{room.name}</p>)}
+        {sortedRooms.map(room => <p className={room.id === roomId ? 'selected-room' : ''} key={room.id} onClick={() => setRoomId(room.id)}>{room.name}</p>)}
       </nav>
       <section>
         <ChatContent userName={userName} roomId={roomId ? roomId : 0} getRoom={getRoom} getRoomMessages={getRoomMessages} rooms={rooms} addRoomMessage={addRoomMessage} />

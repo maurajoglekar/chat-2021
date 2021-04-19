@@ -7,7 +7,7 @@ import MessagesTitle from "./MessagesTitle"
 
 const StyledChatContent = styled.div`
 
-.titleSection {
+.title-section {
   display:block;
   height: 100px;
   background-color: #ffffff;
@@ -15,7 +15,7 @@ const StyledChatContent = styled.div`
   color: gray;
 } 
 
-.addMessageSection {
+.add-message-section {
   height: 100px;
   background-color: #ffffff;
   border-top: 1px solid #E0E0E0;
@@ -63,13 +63,13 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoo
 
   return (
     <StyledChatContent>
-      <section className="titleSection">
+      <section className="title-section">
         <MessagesTitle name={name} users={users} userName={userName}></MessagesTitle>
       </section>
-      <section className="messagesSection">
+      <section className="messages-section">
         <MessageList messages={messages} userName={userName} messagesEndRef={messagesEndRef}></MessageList>
       </section>
-      <section className="addMessageSection">
+      <section className="add-message-section">
         <MessageAddForm userName={userName} addRoomMessage={addRoomMessage} roomId={roomId}
                         messagesEndRef={messagesEndRef} scrollToBottom={scrollToBottom}></MessageAddForm>
       </section>

@@ -4,13 +4,13 @@ import styled from 'styled-components';
 
 const StyledMessagesTitle = styled.div`
 .room-title {
-    text-align: center;
-    font-size: 25px;
-  }
+  text-align: center;
+  font-size: 25px;
+}
 
-  .room-users {
-    text-align: center;
-  }
+.room-users {
+  text-align: center;
+}
 `;
 
 const StyledUsersList = styled.div`

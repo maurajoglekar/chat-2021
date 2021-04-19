@@ -10,7 +10,7 @@ const StyledMessageList = styled.div`
   height: calc(100vh - 250px);
   background-color: #f5f5f5;
 
-ul.messageList {
+ul.message-list {
     list-style: none;
     padding-left: 0;
     margin-left: 30px;
@@ -23,12 +23,12 @@ const StyledListItem = styled.li`
 display: flex;
 justify-content: ${props => props.isMine ? 'flex-end' : 'flex-start'};
 
-.messageItem {
+.message-item {
     max-width: 50%;
     width: max-content;
 }
 
-.messageItem .messageText {
+.message-item .message-text {
     color: ${props => props.isMine ? '#FAF0E6' : 'gray'};
     background-color: ${props => props.isMine ? '#FF3008' : '#fff'};
     padding: 15px 20px;
@@ -36,7 +36,7 @@ justify-content: ${props => props.isMine ? 'flex-end' : 'flex-start'};
     margin-bottom: 0;
   }
 
-.messageItem  .messagedBy {
+.message-item .messaged-by {
     color: gray;
     padding: 5px;
     margin-bottom: 10px;
@@ -56,12 +56,12 @@ export function MessageList({ messages, userName, messagesEndRef }) {
 
     return (
         <StyledMessageList>
-            <ul className="messageList">
+            <ul className="message-list">
                 {messages.map((m) => (
                     <StyledListItem key={m.id} isMine={userName === m.name}>
-                        <div className="messageItem">
-                            <p className="messageText">{m.message}</p>
-                            {userName !== m.name && (<p className="messagedBy">{m.name}</p>)}
+                        <div className="message-item">
+                            <p className="message-text">{m.message}</p>
+                            {userName !== m.name && (<p className="messaged-by">{m.name}</p>)}
                         </div>
                     </StyledListItem>
                 ))}
