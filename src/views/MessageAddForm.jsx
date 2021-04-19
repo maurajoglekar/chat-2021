@@ -33,17 +33,16 @@ class MessageAddForm extends Component {
     addMessage(e) {
         const { userName, addRoomMessage, roomId, scrollToBottom } = this.props;
         if (this._newMessage.value !== "") {
-            addRoomMessage({ roomId, name: userName, message: this._newMessage.value });
+            addRoomMessage({ roomId, name: userName, message: this._newMessage.value, doneCallback: scrollToBottom });
         }
         this._newMessage.value = "";
-        scrollToBottom();
         e.preventDefault();
     };
 
     render() {
         return (
             <StyledMessageAddForm>
-                <div className="add-message-form">
+                <form className="add-message-form">
                     <input
                         id="message"
                         name="message"
@@ -54,7 +53,7 @@ class MessageAddForm extends Component {
                     <button type="submit" onClick={this.addMessage}>
                         Send
                     </button>
-                </div>
+                </form>
             </StyledMessageAddForm>
         );
     }

@@ -28,12 +28,13 @@ export function getRoomMessages({roomId}) {
   };
 }
 
-export function addRoomMessage({roomId, name, message}) {
+export function addRoomMessage({roomId, name, message, doneCallback }) {
   return {
     type: types.ADD_ROOM_MESSAGE,
     roomId,
     name, 
-    message
+    message,
+    doneCallback
   };
 }
 

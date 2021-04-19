@@ -56,7 +56,7 @@ export function* getRoomMessagesSaga({roomId}) {
         yield put(actions.setRooms([roomObjWithMessages]));
 
     } catch (response) {
-        console.log('Error getting room');
+        console.log('Error getting room messages');
     }
 }
 
@@ -64,7 +64,7 @@ function* watchGetRoomMessages() {
     yield takeEvery(types.GET_ROOM_MESSAGES, getRoomMessagesSaga);
 }
 
-export function* addRoomMessageSaga({roomId, name, message}) {
+export function* addRoomMessageSaga({roomId, name, message, doneCallback}) {
     try {
 
         const response = yield call(
@@ -81,8 +81,11 @@ export function* addRoomMessageSaga({roomId, name, message}) {
         };
         yield put(actions.setRoomMessage(objWithMessage));
 
+        // this does the scroll to bottom after the new message is added
+        if (typeof doneCallback === 'function') doneCallback();
+
     } catch (response) {
-        console.log('Error getting room');
+        console.log('Error adding room');
     }
 }
 
