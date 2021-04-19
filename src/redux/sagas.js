@@ -76,7 +76,8 @@ export function* addRoomMessageSaga({roomId, name, message}) {
 
         const objWithMessage = {
             message: response.data,
-            roomId
+            roomId,
+            name
         };
         yield put(actions.setRoomMessage(objWithMessage));
 

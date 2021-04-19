@@ -68,12 +68,12 @@ function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, 
 
   // load the list of rooms
   useEffect(() => { getRooms({ roomId }); },
-    [getRooms], roomId);
-
+    [getRooms, roomId]);
 
   const sortedRooms = rooms.sort(function (a, b) {
     return "".concat(a.name).localeCompare(b.name);
   });
+
   return (
     <StyledChatNav>
       <nav>

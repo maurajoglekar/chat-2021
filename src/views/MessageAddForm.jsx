@@ -36,7 +36,7 @@ class MessageAddForm extends Component {
     addMessage() {
         const { userName, addRoomMessage, roomId } = this.props;
         if (this._newMessage.value !== "") {
-            addRoomMessage({ roomId, name: userName, message: this._newMessage.value })
+            addRoomMessage({ roomId, name: userName, message: this._newMessage.value });
         }
     };
 
