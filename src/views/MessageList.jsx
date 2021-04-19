@@ -1,8 +1,16 @@
-import React from 'react';
+
+import React, { useEffect, useRef } from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledMessageList = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 250px);
+  background-color: #f5f5f5;
+
 ul.messageList {
     list-style: none;
     padding-left: 0;
@@ -45,6 +53,13 @@ const propTypes = {
 };
 
 export function MessageList({ messages, userName }) {
+
+    const messagesEndRef = useRef(null);
+    const scrollToBottom = () => {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    };
+    useEffect(scrollToBottom, [messages]);
+
     return (
         <StyledMessageList>
             <ul className="messageList">
@@ -57,6 +72,7 @@ export function MessageList({ messages, userName }) {
                     </StyledListItem>
                 ))}
             </ul>
+            <div ref={messagesEndRef} />
         </StyledMessageList>
 
     );

@@ -14,7 +14,6 @@ const StyledMessageAddForm = styled.div`
 }
 
 .add-message-form button {
-    margin: 40px 30px;
     font-size: 30px;
     background-color: #FFF;
     border: #FFF solid 0px;
@@ -29,6 +28,11 @@ class MessageAddForm extends Component {
         super();
 
         this.addMessage = this.addMessage.bind(this);
+        this.scrollToBottom = this.scrollToBottom.bind(this);
+    }
+
+    scrollToBottom() {
+        this._messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
 
     addMessage(e) {
@@ -37,13 +41,17 @@ class MessageAddForm extends Component {
             addRoomMessage({ roomId, name: userName, message: this._newMessage.value });
         }
         this._newMessage.value = "";
+        this.scrollToBottom();
         e.preventDefault();
     };
 
     render() {
         return (
             <StyledMessageAddForm>
-                <form className="add-message-form">
+                <div style={{ float:"left", clear: "both" }}
+                     ref={(el) => { this._messagesEnd = el; }}>
+                </div>
+                <div className="add-message-form">
                     <input
                         id="message"
                         name="message"
@@ -54,7 +62,7 @@ class MessageAddForm extends Component {
                     <button type="submit" onClick={this.addMessage}>
                         Send
                     </button>
-                </form>
+                </div>
             </StyledMessageAddForm>
         );
     }

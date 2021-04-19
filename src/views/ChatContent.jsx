@@ -15,14 +15,6 @@ const StyledChatContent = styled.div`
   color: gray;
 } 
 
-.messagesSection {
-  max-height: calc(100vh - 250px);
-  background-color: #f5f5f5;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  min-height: calc(100vh - 250px);
-} 
-
 .addMessageSection {
   height: 100px;
   background-color: #ffffff;
@@ -53,7 +45,7 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoo
   useEffect(() => { getRoom({ roomId }); },
     [getRoom, roomId]);
 
-  // load the selected room
+  // load the selected room messages
   useEffect(() => { getRoomMessages({ roomId }); },
     [getRoomMessages, roomId]);
 
