@@ -7,14 +7,15 @@ const StyledNavHeading = styled.div`
 p#myname {
     font-weight: bold;
     font-size: 20px;
-    margin-top: 30px;
+    margin-top: 20px;
     height: 10px;
   }
 
 p#elapsed {
     font-size: 12px;
     height: 14px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    padding-top: 15px;
   }
 `;
 

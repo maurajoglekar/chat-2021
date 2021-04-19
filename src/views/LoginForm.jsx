@@ -32,7 +32,7 @@ const StyledLoginForm = styled.div`
 }
 `;
 
-export const propTypes = {
+const propTypes = {
     history: PropTypes.object.isRequired
 };
 

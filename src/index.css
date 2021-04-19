@@ -3,20 +3,6 @@ body {
   font-size: 16px;
 }
 
-div#personal p {
-  width: 100%;
-}
-
-p#myname {
-  font-weight: bold;
-  font-size: 20px;
-  margin-top: 30px;
-  height: 22px;
-}
-p#elapsed {
-  font-size: 10px;
-  height: 12px
-}
 nav {
   width: 20%;
   background-color: #FF3008;
@@ -25,7 +11,7 @@ nav p {
   width: 48px;
   height: 48px;
   margin: 10px;
-  color: #ffffff;
+  color: #FAF0E6;
   padding-left: 25px;
 }
 section {

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { Component } from "react";
 
 const StyledMessageAddForm = styled.div`
-form input {
+.add-message-form input {
     width: 80%;
     margin: 40px 30px;
     height: 30px;
@@ -13,7 +13,7 @@ form input {
     color: gray;
 }
 
-form button {
+.add-message-form button {
     width: 10%;
     height: 30px;
     padding: 20px 10px;
@@ -43,7 +43,7 @@ class MessageAddForm extends Component {
     render() {
         return (
             <StyledMessageAddForm>
-                <form id="add-message-form">
+                <div className="add-message-form">
                     <input
                         id="message"
                         name="message"
@@ -54,7 +54,7 @@ class MessageAddForm extends Component {
                     <button type="submit" onClick={this.addMessage}>
                         Send
                     </button>
-                </form>
+                </div>
             </StyledMessageAddForm>
         );
     }

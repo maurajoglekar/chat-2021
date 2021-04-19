@@ -50,3 +50,10 @@ export function setRoomMessage(payload) {
     payload
   };
 }
+
+export function setSelectedRoomId(payload) {
+  return {
+    type: types.SET_SELECTED_ROOM_ID,
+    payload
+  };
+}

@@ -1,6 +1,7 @@
 import * as types from "./types";
 
 const initialState = {
+  selectedRoomId: 0,
   rooms: []
 };
 
@@ -50,6 +51,13 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         rooms: mergedRooms2
+        };
+    }
+    case types.SET_SELECTED_ROOM_ID: {
+      const { roomId } = action.payload;
+      return {
+        ...state,
+        selectedRoomId: roomId
         };
     }
     default:
