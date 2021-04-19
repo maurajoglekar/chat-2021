@@ -8,8 +8,7 @@ import {
   getRooms as getRoomsAction,
   getRoom as getRoomAction,
   getRoomMessages as getRoomMessagesAction,
-  addRoomMessage as addRoomMessageAction,
-  setSelectedRoomId as setSelectedRoomIdAction
+  addRoomMessage as addRoomMessageAction
 } from '../redux/actions';
 import NavHeading from '../views/NavHeading';
 
@@ -47,13 +46,11 @@ const StyledChatNav = styled.div`
 const propTypes = {
   match: PropTypes.object.isRequired,
   rooms: PropTypes.array,
-  selectedRoomId: PropTypes.number.isRequired,
   startTime: PropTypes.Date,
   getRooms: PropTypes.function,
   getRoom: PropTypes.function,
   getRoomMessages: PropTypes.function,
-  addRoomMessage: PropTypes.function,
-  setSelectedRoomId: PropTypes.function
+  addRoomMessage: PropTypes.function
 };
 
 const defaultProps = {
@@ -62,18 +59,12 @@ const defaultProps = {
   getRooms: () => null,
   getRoom: () => null,
   getRoomMessages: () => null,
-  addRoomMessage: () => null,
-  setSelectedRoomId: () => null
+  addRoomMessage: () => null
 };
 
-function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, addRoomMessage, selectedRoomId, setSelectedRoomId }) {
+function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, addRoomMessage }) {
   const { userName } = match.params;
-  const [roomId, setRoomId] = useState(selectedRoomId);
-
-  function onSelectRoom(selectedId) {
-    setRoomId(selectedId);
-    setSelectedRoomId({roomId: selectedId});
-  }
+  const [roomId, setRoomId] = useState(0);
 
   // load the list of rooms
   useEffect(() => { getRooms({ roomId }); },
@@ -87,7 +78,7 @@ function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, 
     <StyledChatNav>
       <nav>
         <NavHeading userName={userName} startTime={startTime}></NavHeading>
-        {sortedRooms.map(room => <p className={room.id === roomId ? 'selectedRoom' : ''} key={room.id} onClick={() => onSelectRoom(room.id)}>{room.name}</p>)}
+        {sortedRooms.map(room => <p className={room.id === roomId ? 'selectedRoom' : ''} key={room.id} onClick={() => setRoomId(room.id)}>{room.name}</p>)}
       </nav>
       <section>
         <ChatContent userName={userName} roomId={roomId ? roomId : 0} getRoom={getRoom} getRoomMessages={getRoomMessages} rooms={rooms} addRoomMessage={addRoomMessage} />
@@ -99,10 +90,9 @@ function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, 
 ChatNav.propTypes = propTypes;
 ChatNav.defaultProps = defaultProps;
 
-const mapStateToProps = ({ rooms, selectedRoomId }) => {
+const mapStateToProps = ({ rooms }) => {
   return {
-    rooms: rooms || [],
-    selectedRoomId
+    rooms: rooms || []
   }
 };
 
@@ -110,6 +100,5 @@ export default connect(mapStateToProps, {
   getRooms: getRoomsAction,
   getRoom: getRoomAction,
   getRoomMessages: getRoomMessagesAction,
-  addRoomMessage: addRoomMessageAction,
-  setSelectedRoomId: setSelectedRoomIdAction
+  addRoomMessage: addRoomMessageAction
 })(withRouter(ChatNav));

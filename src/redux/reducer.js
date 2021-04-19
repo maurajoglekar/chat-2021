@@ -1,12 +1,10 @@
 import * as types from "./types";
 
 const initialState = {
-  selectedRoomId: 0,
   rooms: []
 };
 
-function arrayMerge(destinationArray, arrayToMerge
-) {
+function arrayMerge(destinationArray, arrayToMerge) {
   let destinationCopy = [...destinationArray];
   const arrayToMergeCopy = arrayToMerge.filter(
     item =>
@@ -49,13 +47,6 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         rooms: mergedRooms2
-        };
-    }
-    case types.SET_SELECTED_ROOM_ID: {
-      const { roomId } = action.payload;
-      return {
-        ...state,
-        selectedRoomId: roomId
         };
     }
     default:
