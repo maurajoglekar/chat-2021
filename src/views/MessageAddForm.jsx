@@ -14,10 +14,8 @@ const StyledMessageAddForm = styled.div`
 }
 
 .add-message-form button {
-    width: 10%;
-    height: 30px;
-    padding: 20px 10px;
-    font-size: 28px;
+    margin: 40px 30px;
+    font-size: 30px;
     background-color: #FFF;
     border: #FFF solid 0px;
     color: #6495ED;
@@ -33,17 +31,19 @@ class MessageAddForm extends Component {
         this.addMessage = this.addMessage.bind(this);
     }
 
-    addMessage() {
+    addMessage(e) {
         const { userName, addRoomMessage, roomId } = this.props;
         if (this._newMessage.value !== "") {
             addRoomMessage({ roomId, name: userName, message: this._newMessage.value });
         }
+        this._newMessage.value = "";
+        e.preventDefault();
     };
 
     render() {
         return (
             <StyledMessageAddForm>
-                <div className="add-message-form">
+                <form className="add-message-form">
                     <input
                         id="message"
                         name="message"
@@ -54,7 +54,7 @@ class MessageAddForm extends Component {
                     <button type="submit" onClick={this.addMessage}>
                         Send
                     </button>
-                </div>
+                </form>
             </StyledMessageAddForm>
         );
     }
