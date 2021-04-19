@@ -33,6 +33,7 @@ justify-content: ${props => props.isMine ? 'flex-end' : 'flex-start'};
     color: gray;
     padding: 5px;
     margin-bottom: 10px;
+    margin-top: 5px;
     border-radius: 30px;
     font-size: 18px;
   }

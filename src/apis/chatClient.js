@@ -1,9 +1,6 @@
 import NetworkClient from './network-client';
 
 class ChatClient extends NetworkClient {
-  constructor() {
-      super('');
-  }
 
   getRooms() {
     return this.get('/rooms');

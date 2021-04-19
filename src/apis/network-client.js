@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 class NetworkClient {
-  constructor() {}
 
   request(method = 'get', url = '', config = {}) {
     const baseConfig = {

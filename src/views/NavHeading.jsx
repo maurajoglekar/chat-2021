@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -21,14 +21,24 @@ p#elapsed {
 
 const propTypes = {
     userName: PropTypes.string.isRequired,
-    elapsedMins: PropTypes.number
+    startTime: PropTypes.Date,
 };
 
-const defaultProps = {
-    elapsedMins: 0
-}
+export function NavHeading({ userName, startTime }) {
 
-export function NavHeading({ userName, elapsedMins }) {
+    const [elapsedMins, setElapsedMins] = useState(0);
+
+    function calculateElapsedMins() {
+        const endTime = new Date();
+        let timeDiff = endTime - startTime;
+
+        // get elapsed minutes
+        const newMins = Math.floor(timeDiff / 60000);
+
+        setElapsedMins(newMins);
+    };
+
+    setInterval(calculateElapsedMins, 60000);
 
     return (
         <StyledNavHeading>

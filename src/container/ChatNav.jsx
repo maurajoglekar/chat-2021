@@ -69,19 +69,6 @@ const defaultProps = {
 function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, addRoomMessage, selectedRoomId, setSelectedRoomId }) {
   const { userName } = match.params;
   const [roomId, setRoomId] = useState(selectedRoomId);
-  const [elapsedMins, setElapsedMins] = useState(0);
-
-  // TODO move to subcomponent
-  function getNewTime() {
-    const endTime = new Date();
-    let timeDiff = endTime - startTime;
-
-    // get elapsed minutes
-    const newMins = Math.floor(timeDiff / 60000);
-
-    setElapsedMins(newMins);
-  };
-  setInterval(getNewTime, 60000);
 
   function onSelectRoom(selectedId) {
     setRoomId(selectedId);
@@ -99,7 +86,7 @@ function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, 
   return (
     <StyledChatNav>
       <nav>
-        <NavHeading userName={userName} elapsedMins={elapsedMins}></NavHeading>
+        <NavHeading userName={userName} startTime={startTime}></NavHeading>
         {sortedRooms.map(room => <p className={room.id === roomId ? 'selectedRoom' : ''} key={room.id} onClick={() => onSelectRoom(room.id)}>{room.name}</p>)}
       </nav>
       <section>
