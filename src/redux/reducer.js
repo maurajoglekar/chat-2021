@@ -5,28 +5,26 @@ const initialState = {
   rooms: []
 };
 
-function arrayMerge(destinationArray, arrayToMerge, idField = 'id'
+function arrayMerge(destinationArray, arrayToMerge
 ) {
   let destinationCopy = [...destinationArray];
   const arrayToMergeCopy = arrayToMerge.filter(
     item =>
       arrayToMerge.find(
-        existingItem => existingItem[idField] === item[idField]
+        existingItem => existingItem.id === item.id
       ) === item
   );
 
   const newItems = arrayToMergeCopy.filter(itemToMerge => {
     let found = false;
-
     destinationCopy = destinationCopy.map(item => {
-      if (item[idField] === itemToMerge[idField]) {
-       found = true;
+      if (item.id === itemToMerge.id) {
+        found = true;
         return {...item, ...itemToMerge};
 
       }
       return item;
     });
-
     return !found;
   });
 

@@ -21,13 +21,6 @@ export function getRoom({roomId}) {
   };
 }
 
-export function setRoom(payload) {
-  return {
-    type: types.SET_ROOM,
-    payload
-  };
-}
-
 export function getRoomMessages({roomId}) {
   return {
     type: types.GET_ROOM_MESSAGES,
