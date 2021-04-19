@@ -1,0 +1,17 @@
+
+DoorDash interview project
+by Maura Joglekar
+
+About this project:
+This project was bootstrapped with Create React App.  It uses the following reactJS packages:
+- styled components
+- redux, saga, axios for doing the async calling of the APIs and storing the data in the store
+- react-router
+
+Dependencies:
+- on the APIs provided by server.js
+
+To build and run the application:
+- unzip the project file
+- in the project directory, "yarn install"
+- "yarn start"
