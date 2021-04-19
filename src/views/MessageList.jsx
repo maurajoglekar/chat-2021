@@ -1,5 +1,4 @@
-
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -49,16 +48,11 @@ justify-content: ${props => props.isMine ? 'flex-end' : 'flex-start'};
 
 const propTypes = {
     messages: PropTypes.array.isRequired,
-    userName: PropTypes.string.isRequired
+    userName: PropTypes.string.isRequired,
+    messagesEndRef: PropTypes.node.isRequired
 };
 
-export function MessageList({ messages, userName }) {
-
-    const messagesEndRef = useRef(null);
-    const scrollToBottom = () => {
-        messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    };
-    useEffect(scrollToBottom, [messages]);
+export function MessageList({ messages, userName, messagesEndRef }) {
 
     return (
         <StyledMessageList>
@@ -74,7 +68,6 @@ export function MessageList({ messages, userName }) {
             </ul>
             <div ref={messagesEndRef} />
         </StyledMessageList>
-
     );
 }
 

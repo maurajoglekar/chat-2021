@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useRef} from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MessageList from './MessageList';
@@ -49,11 +49,17 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoo
   useEffect(() => { getRoomMessages({ roomId }); },
     [getRoomMessages, roomId]);
 
-
   const selectedRoom = rooms.find(room => room.id === roomId);
   const name = selectedRoom && selectedRoom.name ? selectedRoom.name : '';
   const users = selectedRoom && selectedRoom.users ? selectedRoom.users : [];
   const messages = selectedRoom && selectedRoom.messages ? selectedRoom.messages : [];
+
+  // scroll to the bottom when messages change
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+   };
+  useEffect(scrollToBottom, [messages]);
 
   return (
     <StyledChatContent>
@@ -61,10 +67,11 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoo
         <MessagesTitle name={name} users={users} userName={userName}></MessagesTitle>
       </section>
       <section className="messagesSection">
-        <MessageList messages={messages} userName={userName}></MessageList>
+        <MessageList messages={messages} userName={userName} messagesEndRef={messagesEndRef}></MessageList>
       </section>
       <section className="addMessageSection">
-        <MessageAddForm userName={userName} addRoomMessage={addRoomMessage} roomId={roomId}></MessageAddForm>
+        <MessageAddForm userName={userName} addRoomMessage={addRoomMessage} roomId={roomId}
+                        messagesEndRef={messagesEndRef} scrollToBottom={scrollToBottom}></MessageAddForm>
       </section>
     </StyledChatContent>
   );

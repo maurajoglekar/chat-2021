@@ -28,29 +28,21 @@ class MessageAddForm extends Component {
         super();
 
         this.addMessage = this.addMessage.bind(this);
-        this.scrollToBottom = this.scrollToBottom.bind(this);
-    }
-
-    scrollToBottom() {
-        this._messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
 
     addMessage(e) {
-        const { userName, addRoomMessage, roomId } = this.props;
+        const { userName, addRoomMessage, roomId, scrollToBottom } = this.props;
         if (this._newMessage.value !== "") {
             addRoomMessage({ roomId, name: userName, message: this._newMessage.value });
         }
         this._newMessage.value = "";
-        this.scrollToBottom();
+        scrollToBottom();
         e.preventDefault();
     };
 
     render() {
         return (
             <StyledMessageAddForm>
-                <div style={{ float:"left", clear: "both" }}
-                     ref={(el) => { this._messagesEnd = el; }}>
-                </div>
                 <div className="add-message-form">
                     <input
                         id="message"
