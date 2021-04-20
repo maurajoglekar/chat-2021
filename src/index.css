@@ -3,28 +3,8 @@ body {
   font-size: 16px;
 }
 
-nav {
-  width: 20%;
-  background-color: #FF3008;
-}
-nav p {
-  width: 48px;
-  height: 48px;
-  margin: 10px;
-  color: #FAF0E6;
-  padding-left: 25px;
-}
 section {
   width: 100%;
   background-color: #ffffff;
 }
-section > header {
-  color: #ffffff;
-  padding: 10px;
-}
-section > header > h1 {
-  font-size: 2em;
-}
-section > header .description {
-  font-style: italic;
-}
+

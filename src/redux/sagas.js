@@ -4,7 +4,7 @@ import chatClient from '../apis/chatClient';
 import { takeEvery, put, call, fork, all } from "redux-saga/effects";
 
 
-export function* getRoomsSaga({roomId}) {
+export function* getRoomsSaga() {
     try {
         const response = yield call(
             [chatClient, chatClient.getRooms]

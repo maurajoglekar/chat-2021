@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import ChatContent from '../views/ChatContent';
+import ChatNav from '../views/ChatNav';
 import { connect } from "react-redux";
 import {
   getRooms as getRoomsAction,
@@ -10,9 +11,9 @@ import {
   getRoomMessages as getRoomMessagesAction,
   addRoomMessage as addRoomMessageAction
 } from '../redux/actions';
-import NavHeading from '../views/NavHeading';
 
-const StyledChatNav = styled.div`
+
+const StyledChatConsole = styled.div`
   display: flex;
   min-height: 100vh;
 
@@ -62,33 +63,25 @@ const defaultProps = {
   addRoomMessage: () => null
 };
 
-function ChatNav({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, addRoomMessage }) {
+function ChatConsole({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, addRoomMessage }) {
   const { userName } = match.params;
   const [roomId, setRoomId] = useState(0);
 
-  // load the list of rooms
-  useEffect(() => { getRooms({ roomId }); },
-    [getRooms, roomId]);
-
-  const sortedRooms = rooms.sort(function (a, b) {
-    return "".concat(a.name).localeCompare(b.name);
-  });
-
   return (
-    <StyledChatNav>
-      <nav>
-        <NavHeading userName={userName} startTime={startTime}></NavHeading>
-        {sortedRooms.map(room => <p className={room.id === roomId ? 'selected-room' : ''} key={room.id} onClick={() => setRoomId(room.id)}>{room.name}</p>)}
-      </nav>
+    <StyledChatConsole>
+        <ChatNav getRooms={getRooms} rooms={rooms} setRoomId={setRoomId}
+                 roomId={roomId} userName={userName} startTime={startTime}>
+
+        </ChatNav>
       <section>
         <ChatContent userName={userName} roomId={roomId ? roomId : 0} getRoom={getRoom} getRoomMessages={getRoomMessages} rooms={rooms} addRoomMessage={addRoomMessage} />
       </section>
-    </StyledChatNav>
+    </StyledChatConsole>
   );
 }
 
-ChatNav.propTypes = propTypes;
-ChatNav.defaultProps = defaultProps;
+ChatConsole.propTypes = propTypes;
+ChatConsole.defaultProps = defaultProps;
 
 const mapStateToProps = ({ rooms }) => {
   return {
@@ -101,4 +94,4 @@ export default connect(mapStateToProps, {
   getRoom: getRoomAction,
   getRoomMessages: getRoomMessagesAction,
   addRoomMessage: addRoomMessageAction
-})(withRouter(ChatNav));
+})(withRouter(ChatConsole));

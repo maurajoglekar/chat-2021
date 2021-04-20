@@ -1,9 +1,8 @@
 import * as types from './types';
 
-export function getRooms({roomId}) {
+export function getRooms() {
   return {
-    type: types.GET_ROOMS,
-    roomId
+    type: types.GET_ROOMS
   };
 }
 
