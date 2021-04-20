@@ -17,27 +17,6 @@ const StyledChatConsole = styled.div`
   display: flex;
   min-height: 100vh;
 
-  div#personal p {
-    width: 100%;
-  }
-
-  nav {
-    min-width: 200px;
-    background-color: #FF3008;
-  }
-
-  nav p {
-    width: 100%;
-    color: #ffffff;
-    padding-left: 25px;
-    padding-top: 25px;
-    margin: 0;
-  }
-
-  nav p.selected-room {
-    background-color: #8B0000;
-  }
-
   section {
     width: 100%;
     background-color: #ffffff;

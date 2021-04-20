@@ -7,15 +7,25 @@ const StyledChatNav = styled.nav`
 
   width: 20%;
   background-color: #FF3008;
+  min-width: 200px;
+  background-color: #FF3008;
 
-p {
-  width: 48px;
-  height: 48px;
-  margin: 10px;
-  color: #FAF0E6;
-  padding-left: 25px;
-}
+  p {
+    width: 100%;
+    color: #ffffff;
+    padding-left: 25px;
+    padding-top: 25px;
+    margin: 0;
+    height: 48px;
+  }
 
+  p.selected-room {
+    background-color: #8B0000;
+  }
+
+  div#personal p {
+    width: 100%;
+  }
 `;
 
 const propTypes = {
