@@ -1,4 +1,8 @@
-import { createStore, applyMiddleware, compose } from "redux";
+import {
+    createStore,
+    applyMiddleware,
+    compose
+} from "redux";
 import reducer from "./redux/reducer";
 import watchChat from "./redux/sagas";
 import createSagaMiddleware from "redux-saga";

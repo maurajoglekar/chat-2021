@@ -48,10 +48,10 @@ function ChatConsole({ match, rooms, getRooms, startTime, getRoom, getRoomMessag
 
   return (
     <StyledChatConsole>
-        <ChatNav getRooms={getRooms} rooms={rooms} setRoomId={setRoomId}
-                 roomId={roomId} userName={userName} startTime={startTime}>
+      <ChatNav getRooms={getRooms} rooms={rooms} setRoomId={setRoomId}
+        roomId={roomId} userName={userName} startTime={startTime}>
 
-        </ChatNav>
+      </ChatNav>
       <section>
         <ChatContent userName={userName} roomId={roomId ? roomId : 0} getRoom={getRoom} getRoomMessages={getRoomMessages} rooms={rooms} addRoomMessage={addRoomMessage} />
       </section>

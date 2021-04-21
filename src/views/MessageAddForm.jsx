@@ -2,6 +2,12 @@ import styled from 'styled-components';
 import React, { Component } from "react";
 
 const StyledMessageAddForm = styled.div`
+
+.add-message-form {
+    display:flex;
+    justify-content: space-between;
+}
+
 .add-message-form input {
     width: 80%;
     margin: 40px 30px;

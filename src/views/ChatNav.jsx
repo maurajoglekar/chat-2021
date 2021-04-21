@@ -29,44 +29,44 @@ const StyledChatNav = styled.nav`
 `;
 
 const propTypes = {
-    getRooms: PropTypes.function,
-    rooms: PropTypes.array,
-    setRoomId: PropTypes.function,
-    roomId: PropTypes.number.isRequired,
-    userName: PropTypes.string.isRequired,
-    startTime: PropTypes.Date
+  getRooms: PropTypes.function,
+  rooms: PropTypes.array,
+  setRoomId: PropTypes.function,
+  roomId: PropTypes.number.isRequired,
+  userName: PropTypes.string.isRequired,
+  startTime: PropTypes.Date
 };
 
 const defaultProps = {
-    getRooms: () => null,
-    rooms: [],
-    setRoomId: () => null,
-    startTime: new Date()
+  getRooms: () => null,
+  rooms: [],
+  setRoomId: () => null,
+  startTime: new Date()
 };
 
 export class ChatNav extends Component {
 
-    componentDidMount() {
-        const { getRooms } = this.props;
-        getRooms();
-    }
+  componentDidMount() {
+    const { getRooms } = this.props;
+    getRooms();
+  }
 
-    render() {
-        const { rooms, setRoomId, roomId, userName, startTime } = this.props;
+  render() {
+    const { rooms, setRoomId, roomId, userName, startTime } = this.props;
 
-        const sortedRooms = rooms.sort(function (a, b) {
-            return "".concat(a.name).localeCompare(b.name);
-        });
+    const sortedRooms = rooms.sort(function (a, b) {
+      return "".concat(a.name).localeCompare(b.name);
+    });
 
-        return (
-            <StyledChatNav>
-                <NavHeading userName={userName} startTime={startTime}></NavHeading>
-                {sortedRooms.map(room =>
-                    <p className={room.id === roomId ? 'selected-room' : ''} key={room.id}
-                       onClick={() => setRoomId(room.id)}>{room.name}</p>)}
-            </StyledChatNav>
-        );
-    }
+    return (
+      <StyledChatNav>
+        <NavHeading userName={userName} startTime={startTime}></NavHeading>
+        {sortedRooms.map(room =>
+          <p className={room.id === roomId ? 'selected-room' : ''} key={room.id}
+            onClick={() => setRoomId(room.id)}>{room.name}</p>)}
+      </StyledChatNav>
+    );
+  }
 }
 
 ChatNav.propTypes = propTypes;

@@ -1,14 +1,20 @@
 import * as types from './types';
 import * as actions from './actions';
 import chatClient from '../apis/chatClient';
-import { takeEvery, put, call, fork, all } from "redux-saga/effects";
+import {
+    takeEvery,
+    put,
+    call,
+    fork,
+    all
+} from "redux-saga/effects";
 
 
 export function* getRoomsSaga() {
     try {
         const response = yield call(
             [chatClient, chatClient.getRooms]
-          );
+        );
 
         yield put(actions.setRooms(response.data));
 
@@ -21,7 +27,9 @@ function* watchGetRooms() {
     yield takeEvery(types.GET_ROOMS, getRoomsSaga);
 }
 
-export function* getRoomSaga({roomId}) {
+export function* getRoomSaga({
+    roomId
+}) {
     try {
 
         const roomResponse = yield call(
@@ -41,7 +49,9 @@ function* watchGetRoom() {
     yield takeEvery(types.GET_ROOM, getRoomSaga);
 }
 
-export function* getRoomMessagesSaga({roomId}) {
+export function* getRoomMessagesSaga({
+    roomId
+}) {
     try {
 
         const roomResponse = yield call(
@@ -64,7 +74,12 @@ function* watchGetRoomMessages() {
     yield takeEvery(types.GET_ROOM_MESSAGES, getRoomMessagesSaga);
 }
 
-export function* addRoomMessageSaga({roomId, name, message, doneCallback}) {
+export function* addRoomMessageSaga({
+    roomId,
+    name,
+    message,
+    doneCallback
+}) {
     try {
 
         const response = yield call(

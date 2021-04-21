@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MessageList from './MessageList';
@@ -57,8 +57,8 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoo
   // scroll to the bottom when messages change
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
-        messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-   };
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
   useEffect(scrollToBottom, [messages]);
 
   return (
@@ -71,7 +71,7 @@ function ChatContent({ roomId, getRoom, getRoomMessages, rooms, userName, addRoo
       </section>
       <section className="add-message-section">
         <MessageAddForm userName={userName} addRoomMessage={addRoomMessage} roomId={roomId}
-                        messagesEndRef={messagesEndRef} scrollToBottom={scrollToBottom}></MessageAddForm>
+          messagesEndRef={messagesEndRef} scrollToBottom={scrollToBottom}></MessageAddForm>
       </section>
     </StyledChatContent>
   );
