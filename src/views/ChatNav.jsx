@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import PropTypes from "prop-types";
+import styled from "styled-components";
 import NavHeading from "./NavHeading";
 
 const StyledChatNav = styled.nav`
-
   width: 20%;
-  background-color: #FF3008;
+  background-color: #ff3008;
   min-width: 200px;
-  background-color: #FF3008;
+  background-color: #ff3008;
 
   p {
     width: 100%;
@@ -20,7 +19,7 @@ const StyledChatNav = styled.nav`
   }
 
   p.selected-room {
-    background-color: #8B0000;
+    background-color: #8b0000;
   }
 
   div#personal p {
@@ -45,7 +44,6 @@ const defaultProps = {
 };
 
 export class ChatNav extends Component {
-
   componentDidMount() {
     const { getRooms } = this.props;
     getRooms();
@@ -61,9 +59,15 @@ export class ChatNav extends Component {
     return (
       <StyledChatNav>
         <NavHeading userName={userName} startTime={startTime}></NavHeading>
-        {sortedRooms.map(room =>
-          <p className={room.id === roomId ? 'selected-room' : ''} key={room.id}
-            onClick={() => setRoomId(room.id)}>{room.name}</p>)}
+        {sortedRooms.map((room) => (
+          <p
+            className={room.id === roomId ? "selected-room" : ""}
+            key={room.id}
+            onClick={() => setRoomId(room.id)}
+          >
+            {room.name}
+          </p>
+        ))}
       </StyledChatNav>
     );
   }

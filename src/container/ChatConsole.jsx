@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
-import ChatContent from '../views/ChatContent';
-import ChatNav from '../views/ChatNav';
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import styled from "styled-components";
+import ChatContent from "../views/ChatContent";
+import ChatNav from "../views/ChatNav";
 import { connect } from "react-redux";
 import {
   getRooms as getRoomsAction,
   getRoom as getRoomAction,
   getRoomMessages as getRoomMessagesAction,
   addRoomMessage as addRoomMessageAction
-} from '../redux/actions';
-
+} from "../redux/actions";
 
 const StyledChatConsole = styled.div`
   display: flex;
@@ -42,18 +41,37 @@ const defaultProps = {
   addRoomMessage: () => null
 };
 
-function ChatConsole({ match, rooms, getRooms, startTime, getRoom, getRoomMessages, addRoomMessage }) {
+function ChatConsole({
+  match,
+  rooms,
+  getRooms,
+  startTime,
+  getRoom,
+  getRoomMessages,
+  addRoomMessage
+}) {
   const { userName } = match.params;
   const [roomId, setRoomId] = useState(0);
 
   return (
     <StyledChatConsole>
-      <ChatNav getRooms={getRooms} rooms={rooms} setRoomId={setRoomId}
-        roomId={roomId} userName={userName} startTime={startTime}>
-
-      </ChatNav>
+      <ChatNav
+        getRooms={getRooms}
+        rooms={rooms}
+        setRoomId={setRoomId}
+        roomId={roomId}
+        userName={userName}
+        startTime={startTime}
+      ></ChatNav>
       <section>
-        <ChatContent userName={userName} roomId={roomId ? roomId : 0} getRoom={getRoom} getRoomMessages={getRoomMessages} rooms={rooms} addRoomMessage={addRoomMessage} />
+        <ChatContent
+          userName={userName}
+          roomId={roomId ? roomId : 0}
+          getRoom={getRoom}
+          getRoomMessages={getRoomMessages}
+          rooms={rooms}
+          addRoomMessage={addRoomMessage}
+        />
       </section>
     </StyledChatConsole>
   );
@@ -65,7 +83,7 @@ ChatConsole.defaultProps = defaultProps;
 const mapStateToProps = ({ rooms }) => {
   return {
     rooms: rooms || []
-  }
+  };
 };
 
 export default connect(mapStateToProps, {

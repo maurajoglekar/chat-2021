@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from "./types";
 
 export function getRooms() {
   return {
@@ -13,30 +13,21 @@ export function setRooms(payload) {
   };
 }
 
-export function getRoom({
-  roomId
-}) {
+export function getRoom({ roomId }) {
   return {
     type: types.GET_ROOM,
     roomId
   };
 }
 
-export function getRoomMessages({
-  roomId
-}) {
+export function getRoomMessages({ roomId }) {
   return {
     type: types.GET_ROOM_MESSAGES,
     roomId
   };
 }
 
-export function addRoomMessage({
-  roomId,
-  name,
-  message,
-  doneCallback
-}) {
+export function addRoomMessage({ roomId, name, message, doneCallback }) {
   return {
     type: types.ADD_ROOM_MESSAGE,
     roomId,
