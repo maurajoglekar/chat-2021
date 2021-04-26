@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import ChatContent from "../views/ChatContent";
-import ChatNav from "../views/ChatNav";
+import Nav from "../views/Nav";
 import { connect } from "react-redux";
 import {
   getRooms as getRoomsAction,
@@ -52,13 +52,13 @@ function ChatConsole({
 
   return (
     <StyledChatConsole>
-      <ChatNav
+      <Nav
         getRooms={getRooms}
         rooms={rooms}
         setRoomId={setRoomId}
         roomId={roomId}
         userName={userName}
-      ></ChatNav>
+      ></Nav>
       <section>
         <ChatContent
           userName={userName}

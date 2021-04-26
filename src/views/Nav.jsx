@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import NavHeading from "./NavHeading";
 
-const StyledChatNav = styled.nav`
+const StyledNav = styled.nav`
   width: 20%;
   background-color: #ff3008;
   min-width: 200px;
@@ -41,7 +41,7 @@ const defaultProps = {
   setRoomId: () => null
 };
 
-export class ChatNav extends Component {
+export class Nav extends Component {
   componentDidMount() {
     const { getRooms } = this.props;
     getRooms();
@@ -56,7 +56,7 @@ export class ChatNav extends Component {
     });
 
     return (
-      <StyledChatNav>
+      <StyledNav>
         <NavHeading userName={userName} startTime={this.startTime}></NavHeading>
         {sortedRooms.map((room) => (
           <p
@@ -67,12 +67,12 @@ export class ChatNav extends Component {
             {room.name}
           </p>
         ))}
-      </StyledChatNav>
+      </StyledNav>
     );
   }
 }
 
-ChatNav.propTypes = propTypes;
-ChatNav.defaultProps = defaultProps;
+Nav.propTypes = propTypes;
+Nav.defaultProps = defaultProps;
 
-export default ChatNav;
+export default Nav;
