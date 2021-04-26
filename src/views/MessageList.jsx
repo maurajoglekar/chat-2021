@@ -49,7 +49,7 @@ const StyledListItem = styled.li`
 const propTypes = {
   messages: PropTypes.array.isRequired,
   userName: PropTypes.string.isRequired,
-  messagesEndRef: PropTypes.node.isRequired
+  messagesEndRef: PropTypes.object.isRequired
 };
 
 export function MessageList({ messages, userName, messagesEndRef }) {

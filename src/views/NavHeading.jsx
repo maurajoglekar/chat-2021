@@ -19,11 +19,10 @@ const StyledNavHeading = styled.div`
 `;
 
 const propTypes = {
-  userName: PropTypes.string.isRequired,
-  startTime: PropTypes.Date
+  userName: PropTypes.string.isRequired
 };
 
-export function NavHeading({ userName, startTime }) {
+export function NavHeading({ userName, startTime = new Date() }) {
   const [elapsedMins, setElapsedMins] = useState(0);
 
   function calculateElapsedMins() {

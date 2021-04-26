@@ -24,10 +24,10 @@ const StyledChatContent = styled.div`
 const propTypes = {
   roomId: PropTypes.number,
   rooms: PropTypes.array,
-  getRoom: PropTypes.function,
-  getRoomMessages: PropTypes.function,
+  getRoom: PropTypes.func,
+  getRoomMessages: PropTypes.func,
   userName: PropTypes.string,
-  addRoomMessage: PropTypes.function
+  addRoomMessage: PropTypes.func
 };
 
 const defaultProps = {

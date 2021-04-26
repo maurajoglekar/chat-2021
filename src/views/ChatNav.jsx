@@ -28,29 +28,28 @@ const StyledChatNav = styled.nav`
 `;
 
 const propTypes = {
-  getRooms: PropTypes.function,
+  getRooms: PropTypes.func,
   rooms: PropTypes.array,
-  setRoomId: PropTypes.function,
+  setRoomId: PropTypes.func,
   roomId: PropTypes.number.isRequired,
-  userName: PropTypes.string.isRequired,
-  startTime: PropTypes.Date
+  userName: PropTypes.string.isRequired
 };
 
 const defaultProps = {
   getRooms: () => null,
   rooms: [],
-  setRoomId: () => null,
-  startTime: new Date()
+  setRoomId: () => null
 };
 
 export class ChatNav extends Component {
   componentDidMount() {
     const { getRooms } = this.props;
     getRooms();
+    this.startTime = new Date();
   }
 
   render() {
-    const { rooms, setRoomId, roomId, userName, startTime } = this.props;
+    const { rooms, setRoomId, roomId, userName } = this.props;
 
     const sortedRooms = rooms.sort(function (a, b) {
       return "".concat(a.name).localeCompare(b.name);
@@ -58,7 +57,7 @@ export class ChatNav extends Component {
 
     return (
       <StyledChatNav>
-        <NavHeading userName={userName} startTime={startTime}></NavHeading>
+        <NavHeading userName={userName} startTime={this.startTime}></NavHeading>
         {sortedRooms.map((room) => (
           <p
             className={room.id === roomId ? "selected-room" : ""}

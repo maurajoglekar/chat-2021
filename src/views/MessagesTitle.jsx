@@ -11,9 +11,7 @@ const StyledMessagesTitle = styled.div`
   .room-users {
     text-align: center;
   }
-`;
 
-const StyledUsersList = styled.div`
   span.my-name {
     color: red;
   }
@@ -25,17 +23,8 @@ const propTypes = {
   userName: PropTypes.string.isRequired
 };
 
-const usersList = (me, others) => (
-  <StyledUsersList>
-    <span className="my-name">{me}</span>
-    {me && me.length > 0 && <span>, </span>}
-    <span>{others}</span>
-  </StyledUsersList>
-);
-
 export function MessagesTitle({ name, users, userName }) {
-  let me,
-    others = "";
+  let me, others = "";
   let temp = users.filter((user) => user !== userName);
 
   if (temp.length === users.length) {
@@ -48,7 +37,10 @@ export function MessagesTitle({ name, users, userName }) {
   return (
     <StyledMessagesTitle>
       <p className="room-title">{name}</p>
-      <p className="room-users">{usersList(me, others)}</p>
+      <p className="room-users">
+        {me && me.length > 0 && <span className="my-name">{me}, </span>}
+        <span>{others}</span>
+      </p>
     </StyledMessagesTitle>
   );
 }

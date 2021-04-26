@@ -25,16 +25,14 @@ const StyledChatConsole = styled.div`
 const propTypes = {
   match: PropTypes.object.isRequired,
   rooms: PropTypes.array,
-  startTime: PropTypes.Date,
-  getRooms: PropTypes.function,
-  getRoom: PropTypes.function,
-  getRoomMessages: PropTypes.function,
-  addRoomMessage: PropTypes.function
+  getRooms: PropTypes.func,
+  getRoom: PropTypes.func,
+  getRoomMessages: PropTypes.func,
+  addRoomMessage: PropTypes.func
 };
 
 const defaultProps = {
   rooms: [],
-  startTime: new Date(),
   getRooms: () => null,
   getRoom: () => null,
   getRoomMessages: () => null,
@@ -45,7 +43,6 @@ function ChatConsole({
   match,
   rooms,
   getRooms,
-  startTime,
   getRoom,
   getRoomMessages,
   addRoomMessage
@@ -61,7 +58,6 @@ function ChatConsole({
         setRoomId={setRoomId}
         roomId={roomId}
         userName={userName}
-        startTime={startTime}
       ></ChatNav>
       <section>
         <ChatContent
