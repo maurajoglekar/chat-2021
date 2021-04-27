@@ -32,13 +32,8 @@ const StyledMessageAddForm = styled.form`
 `;
 
 class MessageAddForm extends Component {
-  constructor() {
-    super();
 
-    this.addMessage = this.addMessage.bind(this);
-  }
-
-  addMessage(e) {
+  addMessage =  e  => {
     const { userName, addRoomMessage, roomId, scrollToBottom } = this.props;
     if (this._newMessage.value !== "") {
       addRoomMessage({
@@ -50,7 +45,7 @@ class MessageAddForm extends Component {
     }
     this._newMessage.value = "";
     e.preventDefault();
-  }
+  };
 
   render() {
     return (

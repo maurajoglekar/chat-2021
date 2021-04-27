@@ -35,17 +35,12 @@ const propTypes = {
 };
 
 class LoginForm extends Component {
-  constructor() {
-    super();
 
-    this.gotoChat = this.gotoChat.bind(this);
-  }
-
-  gotoChat() {
+  gotoChat = () => {
     if (this._userName.value !== "") {
       this.props.history.push(`chat/${this._userName.value}`);
     }
-  }
+  };
 
   render() {
     return (
