@@ -2,28 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import NavHeading from "./NavHeading";
+import NavList from "./NavList";
 
 const StyledNav = styled.nav`
   width: 20%;
   background-color: #ff3008;
   min-width: 200px;
-  background-color: #ff3008;
-
-  p {
-    width: 100%;
+  
+  /* common styling for all paragraph's in nav, both in heading and list */
+  div p {
     color: #ffffff;
     padding-left: 25px;
     padding-top: 25px;
     margin: 0;
-    height: 48px;
-  }
-
-  p.selected-room {
-    background-color: #8b0000;
-  }
-
-  div#personal p {
-    width: 100%;
   }
 `;
 
@@ -51,22 +42,10 @@ export class Nav extends Component {
   render() {
     const { rooms, setRoomId, roomId, userName } = this.props;
 
-    const sortedRooms = rooms.sort(function (a, b) {
-      return "".concat(a.name).localeCompare(b.name);
-    });
-
     return (
       <StyledNav>
-        <NavHeading userName={userName} startTime={this.startTime}></NavHeading>
-        {sortedRooms.map((room) => (
-          <p
-            className={room.id === roomId ? "selected-room" : ""}
-            key={room.id}
-            onClick={() => setRoomId(room.id)}
-          >
-            {room.name}
-          </p>
-        ))}
+        <NavHeading userName={userName} startTime={this.startTime}/>
+        <NavList roomId={roomId} setRoomId={setRoomId} rooms={rooms}/>
       </StyledNav>
     );
   }

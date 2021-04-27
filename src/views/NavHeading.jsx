@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const StyledNavHeading = styled.div`
-  p#name {
+  
+  p.name {
     font-weight: bold;
     font-size: 20px;
     margin-top: 20px;
     height: 10px;
   }
 
-  p#elapsed {
+  p.elapsed {
     font-size: 12px;
     height: 14px;
     margin-bottom: 40px;
@@ -39,10 +40,8 @@ export function NavHeading({ userName, startTime = new Date() }) {
 
   return (
     <StyledNavHeading>
-      <div id="personal">
-        <p id="name">{userName}</p>
-        <p id="elapsed">Online for {elapsedMins} minutes</p>
-      </div>
+      <p className="name">{userName}</p>
+      <p className="elapsed">Online for {elapsedMins} minutes</p>
     </StyledNavHeading>
   );
 }

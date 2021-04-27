@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import React, { Component } from "react";
 
-const StyledMessageAddForm = styled.div`
-  .add-message-form {
-    display: flex;
-    justify-content: space-between;
-  }
+const StyledMessageAddForm = styled.form`
+  display: flex;
+  justify-content: space-between;
 
-  .add-message-form input {
+  input {
     width: 80%;
     margin: 40px 30px;
     height: 30px;
@@ -18,12 +16,18 @@ const StyledMessageAddForm = styled.div`
     color: gray;
   }
 
-  .add-message-form button {
+  button {
+    width: 20%;
     font-size: 30px;
     background-color: #fff;
     border: #fff solid 0px;
     color: #6495ed;
     font-weight: bold;
+    padding: 0;
+  }
+  
+  button:focus {
+    outline: 0;
   }
 `;
 
@@ -50,8 +54,7 @@ class MessageAddForm extends Component {
 
   render() {
     return (
-      <StyledMessageAddForm>
-        <form className="add-message-form">
+        <StyledMessageAddForm>
           <input
             id="message"
             name="message"
@@ -62,8 +65,7 @@ class MessageAddForm extends Component {
           <button type="submit" onClick={this.addMessage}>
             Send
           </button>
-        </form>
-      </StyledMessageAddForm>
+        </StyledMessageAddForm>
     );
   }
 }

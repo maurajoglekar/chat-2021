@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 import React, { Component } from "react";
 
-const StyledLoginForm = styled.div`
-  .app-header {
+const StyledLoginForm = styled.form`
     background-color: #fff;
     min-height: 100vh;
     display: flex;
@@ -12,7 +11,6 @@ const StyledLoginForm = styled.div`
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-  }
 
   input {
     width: 350px;
@@ -51,10 +49,7 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <StyledLoginForm>
-        <div className="app-header">
-          <form id="login-form">
-            <div>
+          <StyledLoginForm>
               <input
                 id="user-name"
                 name="userName"
@@ -62,13 +57,10 @@ class LoginForm extends Component {
                 placeholder="Type your username..."
                 ref={(a) => (this._userName = a)}
               />
-            </div>
             <button type="submit" onClick={this.gotoChat}>
               Join the DoorDash Chat!
             </button>
-          </form>
-        </div>
-      </StyledLoginForm>
+          </StyledLoginForm>
     );
   }
 }
