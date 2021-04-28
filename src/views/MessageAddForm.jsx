@@ -34,7 +34,7 @@ const StyledMessageAddForm = styled.form`
 class MessageAddForm extends Component {
 
   addMessage =  e  => {
-    const { userName, addRoomMessage, roomId, scrollToBottom } = this.props;
+    const { userName, addRoomMessage, roomId, scrollToBottom, ws } = this.props;
     if (this._newMessage.value !== "") {
       addRoomMessage({
         roomId,
@@ -42,6 +42,7 @@ class MessageAddForm extends Component {
         message: this._newMessage.value,
         doneCallback: scrollToBottom
       });
+      ws.send(JSON.stringify({message: this._newMessage.value, userName, fromRoom: roomId}));
     }
     this._newMessage.value = "";
     e.preventDefault();

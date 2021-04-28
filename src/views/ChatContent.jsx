@@ -27,7 +27,8 @@ const propTypes = {
   getRoom: PropTypes.func,
   getRoomMessages: PropTypes.func,
   userName: PropTypes.string,
-  addRoomMessage: PropTypes.func
+  addRoomMessage: PropTypes.func,
+  ws: PropTypes.object.isRequired
 };
 
 const defaultProps = {
@@ -44,7 +45,8 @@ function ChatContent({
   getRoomMessages,
   rooms,
   userName,
-  addRoomMessage
+  addRoomMessage,
+    ws
 }) {
   // load the selected room
   useEffect(() => {
@@ -92,6 +94,7 @@ function ChatContent({
           roomId={roomId}
           messagesEndRef={messagesEndRef}
           scrollToBottom={scrollToBottom}
+          ws={ws}
         ></MessageAddForm>
       </section>
     </StyledChatContent>
