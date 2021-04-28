@@ -1,6 +1,7 @@
 import * as types from "./types";
 import * as actions from "./actions";
 import chatClient from "../apis/chatClient";
+import {generate } from "shortid";
 import { takeEvery, put, call, fork, all } from "redux-saga/effects";
 
 export function* getRoomsSaga() {
@@ -53,20 +54,32 @@ function* watchGetRoomMessages() {
   yield takeEvery(types.GET_ROOM_MESSAGES, getRoomMessagesSaga);
 }
 
-export function* addRoomMessageSaga({ roomId, name, message, doneCallback }) {
+export function* addRoomMessageSaga({ roomId, name, message, writeToBE, doneCallback }) {
   try {
-    const response = yield call(
-      [chatClient, chatClient.addRoomMessage],
-      roomId,
-      name,
-      message
-    );
+      let messageInfo;
+    if (writeToBE) {
+        const response = yield call(
+              [chatClient, chatClient.addRoomMessage],
+              roomId,
+              name,
+              message
+       );
+        messageInfo = response.data;
+    } else {
+        messageInfo = {
+            name,
+            message,
+            id: generate(),
+            reaction: null
+        }
+    }
 
     const objWithMessage = {
-      message: response.data,
+      message: messageInfo,
       roomId,
       name
     };
+
     yield put(actions.setRoomMessage(objWithMessage));
 
     // this does the scroll to bottom after the new message is added

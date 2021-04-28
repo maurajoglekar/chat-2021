@@ -31,18 +31,52 @@ const StyledMessageAddForm = styled.form`
   }
 `;
 
+const URL = 'ws://localhost:3030';
+
 class MessageAddForm extends Component {
 
+  constructor() {
+     super();
+
+     this.ws = new WebSocket(URL);
+  }
+
+  componentDidMount() {
+
+        const { addRoomMessage, scrollToBottom } = this.props;
+
+        this.ws.onopen = () => {
+            console.log('connected')
+        };
+
+        this.ws.onmessage = evt => {
+            // on receiving a message from someone in the chat
+            const { message, userName, fromRoom }  = JSON.parse(evt.data);
+            addRoomMessage({
+                roomId: fromRoom,
+                name: userName,
+                message: message,
+                writeToBE: false,
+                doneCallback: scrollToBottom
+            });
+        };
+
+        this.ws.onclose = () => {
+            console.log('disconnected');
+        }
+  }
+
   addMessage =  e  => {
-    const { userName, addRoomMessage, roomId, scrollToBottom, ws } = this.props;
+    const { userName, addRoomMessage, roomId, scrollToBottom } = this.props;
     if (this._newMessage.value !== "") {
       addRoomMessage({
         roomId,
         name: userName,
         message: this._newMessage.value,
+        writeToBE: true,
         doneCallback: scrollToBottom
       });
-      ws.send(JSON.stringify({message: this._newMessage.value, userName, fromRoom: roomId}));
+      this.ws.send(JSON.stringify({message: this._newMessage.value, userName, fromRoom: roomId}));
     }
     this._newMessage.value = "";
     e.preventDefault();
