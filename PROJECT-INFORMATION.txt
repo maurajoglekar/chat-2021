@@ -9,7 +9,8 @@ This project was bootstrapped with Create React App.  It uses the following reac
 - react-router
 
 Dependencies:
-- on the APIs provided by server.js
+- on the APIs provided by server.js, run using "node server.js"
+- on websocket server for multi-browser communication, run using "node wsServer.js"
 
 To build and run the application:
 - unzip the project file
