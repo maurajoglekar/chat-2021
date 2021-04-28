@@ -24,7 +24,8 @@ const propTypes = {
 };
 
 export function MessagesTitle({ name, users, userName }) {
-  let me, others = "";
+  let me,
+    others = "";
   let temp = users.filter((user) => user !== userName);
 
   if (temp.length === users.length) {

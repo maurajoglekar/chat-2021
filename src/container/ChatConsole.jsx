@@ -39,37 +39,38 @@ const defaultProps = {
   addRoomMessage: () => null
 };
 
-function ChatConsole({ match,
-                         rooms,
-                         getRooms,
-                         getRoom,
-                         getRoomMessages,
-                         addRoomMessage
-                     }) {
-    const { userName } = match.params;
-    const [roomId, setRoomId] = useState(0);
+function ChatConsole({
+  match,
+  rooms,
+  getRooms,
+  getRoom,
+  getRoomMessages,
+  addRoomMessage
+}) {
+  const { userName } = match.params;
+  const [roomId, setRoomId] = useState(0);
 
-    return (
-        <StyledChatConsole>
-            <Nav
-                getRooms={getRooms}
-                rooms={rooms}
-                setRoomId={setRoomId}
-                roomId={roomId}
-                userName={userName}
-            ></Nav>
-            <section>
-                <ChatContent
-                    userName={userName}
-                    roomId={roomId ? roomId : 0}
-                    getRoom={getRoom}
-                    getRoomMessages={getRoomMessages}
-                    rooms={rooms}
-                    addRoomMessage={addRoomMessage}
-                />
-            </section>
-        </StyledChatConsole>
-    );
+  return (
+    <StyledChatConsole>
+      <Nav
+        getRooms={getRooms}
+        rooms={rooms}
+        setRoomId={setRoomId}
+        roomId={roomId}
+        userName={userName}
+      ></Nav>
+      <section>
+        <ChatContent
+          userName={userName}
+          roomId={roomId ? roomId : 0}
+          getRoom={getRoom}
+          getRoomMessages={getRoomMessages}
+          rooms={rooms}
+          addRoomMessage={addRoomMessage}
+        />
+      </section>
+    </StyledChatConsole>
+  );
 }
 
 ChatConsole.propTypes = propTypes;

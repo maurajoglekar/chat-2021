@@ -1,7 +1,7 @@
 import * as types from "./types";
 import * as actions from "./actions";
 import chatClient from "./apis/chatClient";
-import {generate } from "shortid";
+import { generate } from "shortid";
 import { takeEvery, put, call, fork, all } from "redux-saga/effects";
 
 export function* getRoomsSaga() {
@@ -54,24 +54,30 @@ function* watchGetRoomMessages() {
   yield takeEvery(types.GET_ROOM_MESSAGES, getRoomMessagesSaga);
 }
 
-export function* addRoomMessageSaga({ roomId, name, message, writeToBE, doneCallback }) {
+export function* addRoomMessageSaga({
+  roomId,
+  name,
+  message,
+  writeToBE,
+  doneCallback
+}) {
   try {
-      let messageInfo;
+    let messageInfo;
     if (writeToBE) {
-        const response = yield call(
-              [chatClient, chatClient.addRoomMessage],
-              roomId,
-              name,
-              message
-       );
-        messageInfo = response.data;
+      const response = yield call(
+        [chatClient, chatClient.addRoomMessage],
+        roomId,
+        name,
+        message
+      );
+      messageInfo = response.data;
     } else {
-        messageInfo = {
-            name,
-            message,
-            id: generate(),
-            reaction: null
-        }
+      messageInfo = {
+        name,
+        message,
+        id: generate(),
+        reaction: null
+      };
     }
 
     const objWithMessage = {

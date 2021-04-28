@@ -8,7 +8,7 @@ const StyledNav = styled.nav`
   width: 20%;
   background-color: #ff3008;
   min-width: 200px;
-  
+
   /* common styling for all paragraph's in nav, both in heading and list */
   div p {
     color: #ffffff;
@@ -44,8 +44,8 @@ export class Nav extends Component {
 
     return (
       <StyledNav>
-        <NavHeading userName={userName} startTime={this.startTime}/>
-        <NavList roomId={roomId} setRoomId={setRoomId} rooms={rooms}/>
+        <NavHeading userName={userName} startTime={this.startTime} />
+        <NavList roomId={roomId} setRoomId={setRoomId} rooms={rooms} />
       </StyledNav>
     );
   }

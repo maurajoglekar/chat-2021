@@ -1,9 +1,8 @@
-import NetworkClient from './network-client';
+import NetworkClient from "./network-client";
 
 class ChatClient extends NetworkClient {
-
   getRooms() {
-    return this.get('/rooms');
+    return this.get("/rooms");
   }
 
   getRoom(roomId) {
@@ -24,7 +23,6 @@ class ChatClient extends NetworkClient {
       data: dataObj
     });
   }
-
 }
 
 const chatClient = new ChatClient();

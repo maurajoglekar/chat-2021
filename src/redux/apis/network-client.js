@@ -1,8 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 class NetworkClient {
-
-  request(method = 'get', url = '', config = {}) {
+  request(method = "get", url = "", config = {}) {
     const baseConfig = {
       method,
       url: `http://localhost:8080/api${url}`,
@@ -16,11 +15,11 @@ class NetworkClient {
   }
 
   get(url, config) {
-    return this.request('get', url, config);
+    return this.request("get", url, config);
   }
 
   post(url, config) {
-    return this.request('post', url, config);
+    return this.request("post", url, config);
   }
 }
 

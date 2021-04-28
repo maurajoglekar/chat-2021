@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const StyledNavHeading = styled.div`
-  
   p.name {
     font-weight: bold;
     font-size: 20px;
