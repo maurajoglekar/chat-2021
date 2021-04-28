@@ -1,6 +1,6 @@
 import * as types from "./types";
 import * as actions from "./actions";
-import chatClient from "../apis/chatClient";
+import chatClient from "./apis/chatClient";
 import { takeEvery, put, call, fork, all } from "redux-saga/effects";
 
 export function* getRoomsSaga() {
