@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const StyledNavHeading = styled.div`
   p.name {
@@ -19,15 +19,19 @@ const StyledNavHeading = styled.div`
 `;
 
 const propTypes = {
+  startTime: PropTypes.Date,
   userName: PropTypes.string.isRequired
 };
 
-export function NavHeading({ userName, startTime = new Date() }) {
+const defaultProps = {
+  startTime: new Date()
+};
+export function NavHeading({ userName, startTime }) {
   const [elapsedMins, setElapsedMins] = useState(0);
 
   function calculateElapsedMins() {
     const endTime = new Date();
-    let timeDiff = endTime - startTime;
+    const timeDiff = endTime - startTime;
 
     // get elapsed minutes
     const newMins = Math.floor(timeDiff / 60000);
@@ -39,12 +43,17 @@ export function NavHeading({ userName, startTime = new Date() }) {
 
   return (
     <StyledNavHeading>
-      <p className="name">{userName}</p>
-      <p className="elapsed">Online for {elapsedMins} minutes</p>
+      <p className="name" data-test-id="user-name">
+        {userName}
+      </p>
+      <p className="elapsed" data-test-id="elapsed-time">
+        Online for {elapsedMins} minutes
+      </p>
     </StyledNavHeading>
   );
 }
 
 NavHeading.propTypes = propTypes;
+NavHeading.defaultProps = defaultProps;
 
 export default NavHeading;

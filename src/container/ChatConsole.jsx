@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
-import styled from "styled-components";
-import ChatContent from "../views/ChatContent";
-import Nav from "../views/Nav";
-import { connect } from "react-redux";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import ChatContent from '../views/ChatContent';
+import Nav from '../views/Nav';
 import {
   getRooms as getRoomsAction,
   getRoom as getRoomAction,
   getRoomMessages as getRoomMessagesAction,
   addRoomMessage as addRoomMessageAction
-} from "../redux/actions";
+} from '../redux/actions';
 
 const StyledChatConsole = styled.div`
   display: flex;
@@ -23,12 +23,12 @@ const StyledChatConsole = styled.div`
 `;
 
 const propTypes = {
-  match: PropTypes.object.isRequired,
-  rooms: PropTypes.array,
-  getRooms: PropTypes.func,
+  addRoomMessage: PropTypes.func,
   getRoom: PropTypes.func,
   getRoomMessages: PropTypes.func,
-  addRoomMessage: PropTypes.func
+  getRooms: PropTypes.func,
+  match: PropTypes.object.isRequired,
+  rooms: PropTypes.array
 };
 
 const defaultProps = {
@@ -54,19 +54,19 @@ function ChatConsole({
     <StyledChatConsole>
       <Nav
         getRooms={getRooms}
+        roomId={roomId}
         rooms={rooms}
         setRoomId={setRoomId}
-        roomId={roomId}
         userName={userName}
-      ></Nav>
+      />
       <section>
         <ChatContent
-          userName={userName}
-          roomId={roomId ? roomId : 0}
+          addRoomMessage={addRoomMessage}
           getRoom={getRoom}
           getRoomMessages={getRoomMessages}
+          roomId={roomId || 0}
           rooms={rooms}
-          addRoomMessage={addRoomMessage}
+          userName={userName}
         />
       </section>
     </StyledChatConsole>

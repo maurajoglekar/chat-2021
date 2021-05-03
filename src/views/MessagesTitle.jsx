@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const StyledMessagesTitle = styled.div`
   .room-title {
@@ -19,20 +19,20 @@ const StyledMessagesTitle = styled.div`
 
 const propTypes = {
   name: PropTypes.string.isRequired,
-  users: PropTypes.array.isRequired,
-  userName: PropTypes.string.isRequired
+  userName: PropTypes.string.isRequired,
+  users: PropTypes.array.isRequired
 };
 
 export function MessagesTitle({ name, users, userName }) {
-  let me,
-    others = "";
-  let temp = users.filter((user) => user !== userName);
+  let me;
+  let others = '';
+  const temp = users.filter(user => user !== userName);
 
   if (temp.length === users.length) {
-    others = users.join(", ");
+    others = users.join(', ');
   } else {
     me = userName;
-    others = temp.join(", ");
+    others = temp.join(', ');
   }
 
   return (

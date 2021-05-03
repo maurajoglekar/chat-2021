@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import NavHeading from "./NavHeading";
-import NavList from "./NavList";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import NavHeading from './NavHeading';
+import NavList from './NavList';
 
 const StyledNav = styled.nav`
   width: 20%;
@@ -20,9 +20,9 @@ const StyledNav = styled.nav`
 
 const propTypes = {
   getRooms: PropTypes.func,
+  roomId: PropTypes.number.isRequired,
   rooms: PropTypes.array,
   setRoomId: PropTypes.func,
-  roomId: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired
 };
 
@@ -44,8 +44,8 @@ export class Nav extends Component {
 
     return (
       <StyledNav>
-        <NavHeading userName={userName} startTime={this.startTime} />
-        <NavList roomId={roomId} setRoomId={setRoomId} rooms={rooms} />
+        <NavHeading startTime={this.startTime} userName={userName} />
+        <NavList roomId={roomId} rooms={rooms} setRoomId={setRoomId} />
       </StyledNav>
     );
   }

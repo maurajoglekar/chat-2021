@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import React, { Component } from "react";
+import styled from 'styled-components';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 const StyledMessageAddForm = styled.form`
   display: flex;
@@ -31,7 +32,14 @@ const StyledMessageAddForm = styled.form`
   }
 `;
 
-const URL = "ws://localhost:3030";
+const URL = 'ws://localhost:3030';
+
+const propTypes = {
+  addRoomMessage: PropTypes.func.isRequired,
+  roomId: PropTypes.number.isRequired,
+  scrollToBottom: PropTypes.func.isRequired,
+  userName: PropTypes.string.isRequired
+};
 
 class MessageAddForm extends Component {
   constructor() {
@@ -44,45 +52,45 @@ class MessageAddForm extends Component {
     const { addRoomMessage, scrollToBottom } = this.props;
 
     this.ws.onopen = () => {
-      console.log("connected");
+      console.log('connected');
     };
 
-    this.ws.onmessage = (evt) => {
+    this.ws.onmessage = evt => {
       // on receiving a message from someone in the chat
       const { message, userName, fromRoom } = JSON.parse(evt.data);
       addRoomMessage({
         roomId: fromRoom,
         name: userName,
-        message: message,
+        message,
         writeToBE: false,
         doneCallback: scrollToBottom
       });
     };
 
     this.ws.onclose = () => {
-      console.log("disconnected");
+      console.log('disconnected');
     };
   }
 
-  addMessage = (e) => {
+  addMessage = e => {
     const { userName, addRoomMessage, roomId, scrollToBottom } = this.props;
-    if (this._newMessage.value !== "") {
+    if (this.newMessage.value !== '') {
       addRoomMessage({
         roomId,
         name: userName,
-        message: this._newMessage.value,
+        message: this.newMessage.value,
         writeToBE: true,
         doneCallback: scrollToBottom
       });
       this.ws.send(
         JSON.stringify({
-          message: this._newMessage.value,
+          message: this.newMessage.value,
           userName,
           fromRoom: roomId
         })
       );
     }
-    this._newMessage.value = "";
+    this.newMessage.value = '';
     e.preventDefault();
   };
 
@@ -90,18 +98,22 @@ class MessageAddForm extends Component {
     return (
       <StyledMessageAddForm>
         <input
+          ref={a => {
+            this.newMessage = a;
+          }}
           id="message"
           name="message"
-          type="text"
           placeholder="Type a message..."
-          ref={(a) => (this._newMessage = a)}
+          type="text"
         />
-        <button type="submit" onClick={this.addMessage}>
+        <button onClick={this.addMessage} type="submit">
           Send
         </button>
       </StyledMessageAddForm>
     );
   }
 }
+
+MessageAddForm.propTypes = propTypes;
 
 export default MessageAddForm;

@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import MessageList from "./MessageList";
-import MessageAddForm from "./MessageAddForm";
-import MessagesTitle from "./MessagesTitle";
+import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import MessageList from './MessageList';
+import MessageAddForm from './MessageAddForm';
+import MessagesTitle from './MessagesTitle';
 
 const StyledChatContent = styled.div`
   .title-section {
@@ -22,19 +22,19 @@ const StyledChatContent = styled.div`
 `;
 
 const propTypes = {
-  roomId: PropTypes.number,
-  rooms: PropTypes.array,
+  addRoomMessage: PropTypes.func,
   getRoom: PropTypes.func,
   getRoomMessages: PropTypes.func,
-  userName: PropTypes.string,
-  addRoomMessage: PropTypes.func
+  roomId: PropTypes.number.isRequired,
+  rooms: PropTypes.array,
+  userName: PropTypes.string
 };
 
 const defaultProps = {
   rooms: [],
   getRoom: () => null,
   getRoomMessages: () => null,
-  userName: "",
+  userName: '',
   addRoomMessage: () => null
 };
 
@@ -56,8 +56,8 @@ function ChatContent({
     getRoomMessages({ roomId });
   }, [getRoomMessages, roomId]);
 
-  const selectedRoom = rooms.find((room) => room.id === roomId);
-  const name = selectedRoom && selectedRoom.name ? selectedRoom.name : "";
+  const selectedRoom = rooms.find(room => room.id === roomId);
+  const name = selectedRoom && selectedRoom.name ? selectedRoom.name : '';
   const users = selectedRoom && selectedRoom.users ? selectedRoom.users : [];
   const messages =
     selectedRoom && selectedRoom.messages ? selectedRoom.messages : [];
@@ -65,34 +65,30 @@ function ChatContent({
   // scroll to the bottom when messages change
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
   };
   useEffect(scrollToBottom, [messages]);
 
   return (
     <StyledChatContent>
       <section className="title-section">
-        <MessagesTitle
-          name={name}
-          users={users}
-          userName={userName}
-        ></MessagesTitle>
+        <MessagesTitle name={name} userName={userName} users={users} />
       </section>
       <section className="messages-section">
         <MessageList
           messages={messages}
-          userName={userName}
           messagesEndRef={messagesEndRef}
-        ></MessageList>
+          userName={userName}
+        />
       </section>
       <section className="add-message-section">
         <MessageAddForm
-          userName={userName}
           addRoomMessage={addRoomMessage}
-          roomId={roomId}
           messagesEndRef={messagesEndRef}
+          roomId={roomId}
           scrollToBottom={scrollToBottom}
-        ></MessageAddForm>
+          userName={userName}
+        />
       </section>
     </StyledChatContent>
   );

@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { withRouter } from "react-router-dom";
-import React, { Component } from "react";
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
 
 const StyledLoginForm = styled.form`
   background-color: #fff;
@@ -36,8 +36,9 @@ const propTypes = {
 
 class LoginForm extends Component {
   gotoChat = () => {
-    if (this._userName.value !== "") {
-      this.props.history.push(`chat/${this._userName.value}`);
+    const { history } = this.props;
+    if (this.userName.value !== '') {
+      history.push(`chat/${this.userName.value}`);
     }
   };
 
@@ -45,13 +46,15 @@ class LoginForm extends Component {
     return (
       <StyledLoginForm>
         <input
+          ref={a => {
+            this.userName = a;
+          }}
           id="user-name"
           name="userName"
-          type="text"
           placeholder="Type your username..."
-          ref={(a) => (this._userName = a)}
+          type="text"
         />
-        <button type="submit" onClick={this.gotoChat}>
+        <button onClick={this.gotoChat} type="submit">
           Join the DoorDash Chat!
         </button>
       </StyledLoginForm>

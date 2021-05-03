@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const StyledMessageList = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const StyledMessageList = styled.div`
 
 const StyledListItem = styled.li`
   display: flex;
-  justify-content: ${(props) => (props.isMine ? "flex-end" : "flex-start")};
+  justify-content: ${props => (props.isMine ? 'flex-end' : 'flex-start')};
 
   .message-item {
     max-width: 50%;
@@ -29,8 +29,8 @@ const StyledListItem = styled.li`
   }
 
   .message-item .message-text {
-    color: ${(props) => (props.isMine ? "#FAF0E6" : "gray")};
-    background-color: ${(props) => (props.isMine ? "#FF3008" : "#fff")};
+    color: ${props => (props.isMine ? '#FAF0E6' : 'gray')};
+    background-color: ${props => (props.isMine ? '#FF3008' : '#fff')};
     padding: 15px 20px;
     border-radius: 2em;
     margin-bottom: 0;
@@ -48,15 +48,15 @@ const StyledListItem = styled.li`
 
 const propTypes = {
   messages: PropTypes.array.isRequired,
-  userName: PropTypes.string.isRequired,
-  messagesEndRef: PropTypes.object.isRequired
+  messagesEndRef: PropTypes.object.isRequired,
+  userName: PropTypes.string.isRequired
 };
 
 export function MessageList({ messages, userName, messagesEndRef }) {
   return (
     <StyledMessageList>
       <ul className="message-list">
-        {messages.map((m) => (
+        {messages.map(m => (
           <StyledListItem key={m.id} isMine={userName === m.name}>
             <div className="message-item">
               <p className="message-text">{m.message}</p>
