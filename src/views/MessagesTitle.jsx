@@ -37,10 +37,16 @@ export function MessagesTitle({ name, users, userName }) {
 
   return (
     <StyledMessagesTitle>
-      <p className="room-title">{name}</p>
-      <p className="room-users">
-        {me && me.length > 0 && <span className="my-name">{me}, </span>}
-        <span>{others}</span>
+      <p className="room-title" data-test-id="room-title">
+        {name}
+      </p>
+      <p className="room-users" data-test-id="room-users">
+        {me && me.length > 0 && (
+          <span className="my-name" data-test-id="self">
+            {me},{' '}
+          </span>
+        )}
+        <span data-test-id="others">{others}</span>
       </p>
     </StyledMessagesTitle>
   );

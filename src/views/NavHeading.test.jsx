@@ -12,7 +12,6 @@ describe('NavHeading component', () => {
     it('renders correctly', () => {
         const wrapper = shallow(<NavHeading {...minprops} />);
 
-        // console.log(wrapper.find('[data-test-id="user-name"]').debug());
         expect(wrapper.find('[data-test-id="user-name"]').text()).toEqual('Ryan');
         expect(wrapper.find('[data-test-id="elapsed-time"]').text()).toEqual('Online for 0 minutes');
 

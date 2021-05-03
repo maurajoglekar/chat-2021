@@ -13,7 +13,6 @@ describe('NavList component', () => {
     it('renders nav list', () => {
         const wrapper = shallow(<NavList {...minprops} />);
 
-        // console.log(wrapper.debug());
         expect(wrapper.find('[data-test-id="room-name-1"]').text()).toEqual('Coffee Chats');
         expect(wrapper.find('[data-test-id="room-name-0"]').text()).toEqual('Tea Chats');
 
