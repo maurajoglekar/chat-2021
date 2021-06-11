@@ -25,8 +25,8 @@ router.use(function(req, res, next) {
 
 // Simple in memory database
 const database = [
-  { name: 'Tea Chats', id: 0, users: ['Ryan','Nick', 'Danielle'], messages: [{name: 'Ryan', message: 'ayyyyy', id: 'gg35545', reaction: null},{name: 'Nick', message: 'lmao', id: 'yy35578', reaction: null}, {name: 'Danielle', message: 'leggooooo', id: 'hh9843', reaction: null}]},
-  { name: 'Coffee Chats', id: 1, users: ['Jessye'], messages: [{name: 'Jessye', message: 'ayy', id: 'ff35278', reaction: null}]}
+  { name: 'Tea Chats', id: 0, users: ['Ryan','Nick'], messages: [{name: 'Ryan', message: 'ayyyyy', id: 'gg35545', reaction: null},{name: 'Nick', message: 'lmao', id: 'yy35578', reaction: null}]},
+  { name: 'Coffee Chats', id: 1, users: ['Abdul'], messages: [{name: 'Abdul', message: 'ayy', id: 'ff35278', reaction: null}]}
 ]
 
 
@@ -107,12 +107,38 @@ router.route('/rooms/:roomId/messages')
     } else {
       logUser(room, req.body.name)
       const reaction = req.body.reaction || null
-      const messageObj = { name: req.body.name, message: req.body.message, id: shortid.generate(), reaction }
-      room.messages.push(messageObj)
+      room.messages.push({name: req.body.name, message: req.body.message, id: shortid.generate(), reaction})
       console.log('Response:',{message: 'OK!'})
-      res.json(messageObj)
+      res.json({message: 'OK!'})
     }
   })
+
+  router.route('/rooms/:roomId/messages/:messageId')
+    .post(function(req, res) {
+      room = findRoom(req.params.roomId)
+      if (room.error) {
+        console.log('Response:',room)
+        res.json(room)
+      } else {
+        messageIndex = findMessageIndex(room, req.params.messageId)
+        if (messageIndex === -1){
+          res.json({error: `a message with id ${req.params.messageId} does not exist`})
+        } else {
+          const roomIndex = findRoomIndex(req.params.roomId)
+          console.log({roomIndex, messageIndex})
+          if(req.body.name !== undefined) {
+            database[roomIndex].messages[messageIndex].name = req.body.name
+          }
+          if(req.body.message !== undefined) {
+            database[roomIndex].messages[messageIndex].message = req.body.message
+          }
+          if(req.body.reaction !== undefined) {
+            database[roomIndex].messages[messageIndex].reaction = req.body.reaction
+          }
+          res.json({message: 'OK!'})
+        }
+      }
+    })
 
 app.use('/api', router)
 app.listen(port)
