@@ -50,3 +50,20 @@ export function setRoomMessage(payload) {
     payload
   };
 }
+
+export function addRoomMessageReaction({ roomId, messageId, reaction, doneCallback }) {
+  return {
+    type: types.ADD_ROOM_MESSAGE_REACTION,
+    roomId,
+    messageId,
+    reaction,
+    doneCallback
+  };
+}
+
+export function setRoomMessageReaction(payload) {
+  return {
+    type: types.SET_ROOM_MESSAGE_REACTION,
+    payload
+  };
+}

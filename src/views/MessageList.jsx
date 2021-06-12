@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { ReactComponent as Neutral} from '../assets/addReaction.svg';
+import { ReactComponent as Smiley} from '../assets/smiley.svg';
 
 const StyledMessageList = styled.div`
   display: flex;
@@ -16,6 +18,12 @@ const StyledMessageList = styled.div`
     margin-left: 30px;
     width: 95%;
     font-size: 20px;
+  }
+
+  .reaction-icon {
+    width: 25px;
+    height: 25px;
+    float: right;
   }
 `;
 
@@ -49,17 +57,33 @@ const StyledListItem = styled.li`
 const propTypes = {
   messages: PropTypes.array.isRequired,
   messagesEndRef: PropTypes.object.isRequired,
-  userName: PropTypes.string.isRequired
+  userName: PropTypes.string.isRequired,
+  addRoomMessageReaction: PropTypes.func,
+  roomId: PropTypes.number.isRequired
 };
 
-export function MessageList({ messages, userName, messagesEndRef }) {
+export function MessageList({ messages, userName, messagesEndRef, addRoomMessageReaction, roomId }) {
+
+  function onReactionClick (reaction, addRoomMessageReaction, messageId, roomId) {
+    const reactionPayload = reaction === null ? 'smiley' : null;
+    addRoomMessageReaction({
+      roomId,
+      messageId,
+      reaction: reactionPayload
+    })
+  }
+
   return (
     <StyledMessageList>
       <ul className="message-list">
         {messages.map(m => (
           <StyledListItem key={m.id} isMine={userName === m.name}>
             <div className="message-item">
-              <p className="message-text">{m.message}</p>
+              <div className="message-container">
+                <p className="message-text">{m.message}</p>
+                {m.reaction === null && <Neutral onClick={()=> onReactionClick(m.reaction, addRoomMessageReaction, m.id, roomId) } className="reaction-icon"/>}
+                {m.reaction === 'smiley' && <Smiley onClick={()=> onReactionClick(m.reaction, addRoomMessageReaction, m.id, roomId) } className="reaction-icon"/>}
+              </div>
               {userName !== m.name && <p className="messaged-by">{m.name}</p>}
             </div>
           </StyledListItem>

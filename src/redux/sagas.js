@@ -99,10 +99,38 @@ function* watchAddRoomMessage() {
   yield takeEvery(types.ADD_ROOM_MESSAGE, addRoomMessageSaga);
 }
 
+export function* addRoomMessageReactionSaga({ roomId, messageId, reaction, doneCallback }) {
+  try {
+    yield call(
+      [chatClient, chatClient.addRoomMessageReaction],
+      roomId,
+      reaction,
+      messageId
+    );
+
+    const objWithMessage = {
+      roomId,
+      messageId,
+      reaction
+    };
+
+    yield put(actions.setRoomMessageReaction(objWithMessage));
+
+    if (typeof doneCallback === "function") doneCallback();
+  } catch (response) {
+    console.log("Error adding message reaction");
+  }
+}
+
+function* watchAddRoomMessageReaction() {
+  yield takeEvery(types.ADD_ROOM_MESSAGE_REACTION, addRoomMessageReactionSaga);
+}
+
 // ------------ Watch Sagas ---------------
 export default function* watchChat() {
   yield all([fork(watchGetRooms)]);
   yield all([fork(watchGetRoom)]);
   yield all([fork(watchGetRoomMessages)]);
   yield all([fork(watchAddRoomMessage)]);
+  yield all([fork(watchAddRoomMessageReaction)]);
 }

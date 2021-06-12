@@ -23,7 +23,19 @@ class ChatClient extends NetworkClient {
       data: dataObj
     });
   }
+
+  addRoomMessageReaction(roomId, reaction, messageId ) {
+    const dataObj = {
+      reaction
+    };
+
+    return this.post(`/rooms/${roomId}/messages/${messageId}`, {
+      data: dataObj
+    });
+  }
+  
 }
+
 
 const chatClient = new ChatClient();
 export default chatClient;

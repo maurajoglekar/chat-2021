@@ -9,7 +9,8 @@ import {
   getRooms as getRoomsAction,
   getRoom as getRoomAction,
   getRoomMessages as getRoomMessagesAction,
-  addRoomMessage as addRoomMessageAction
+  addRoomMessage as addRoomMessageAction,
+  addRoomMessageReaction as addRoomMessageReactionAction
 } from '../redux/actions';
 
 const StyledChatConsole = styled.div`
@@ -28,7 +29,8 @@ const propTypes = {
   getRoomMessages: PropTypes.func,
   getRooms: PropTypes.func,
   match: PropTypes.object.isRequired,
-  rooms: PropTypes.array
+  rooms: PropTypes.array,
+  addRoomMessageReaction: PropTypes.func
 };
 
 const defaultProps = {
@@ -36,7 +38,8 @@ const defaultProps = {
   getRooms: () => null,
   getRoom: () => null,
   getRoomMessages: () => null,
-  addRoomMessage: () => null
+  addRoomMessage: () => null,
+  addRoomMessageReaction: () => null,
 };
 
 function ChatConsole({
@@ -45,7 +48,8 @@ function ChatConsole({
   getRooms,
   getRoom,
   getRoomMessages,
-  addRoomMessage
+  addRoomMessage,
+  addRoomMessageReaction
 }) {
   const { userName } = match.params;
   const [roomId, setRoomId] = useState(0);
@@ -62,6 +66,7 @@ function ChatConsole({
       <section>
         <ChatContent
           addRoomMessage={addRoomMessage}
+          addRoomMessageReaction={addRoomMessageReaction}
           getRoom={getRoom}
           getRoomMessages={getRoomMessages}
           roomId={roomId || 0}
@@ -86,5 +91,6 @@ export default connect(mapStateToProps, {
   getRooms: getRoomsAction,
   getRoom: getRoomAction,
   getRoomMessages: getRoomMessagesAction,
-  addRoomMessage: addRoomMessageAction
+  addRoomMessage: addRoomMessageAction,
+  addRoomMessageReaction: addRoomMessageReactionAction
 })(withRouter(ChatConsole));

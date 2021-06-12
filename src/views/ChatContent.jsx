@@ -27,7 +27,8 @@ const propTypes = {
   getRoomMessages: PropTypes.func,
   roomId: PropTypes.number.isRequired,
   rooms: PropTypes.array,
-  userName: PropTypes.string
+  userName: PropTypes.string,
+  addRoomMessageReaction: PropTypes.func
 };
 
 const defaultProps = {
@@ -35,7 +36,8 @@ const defaultProps = {
   getRoom: () => null,
   getRoomMessages: () => null,
   userName: '',
-  addRoomMessage: () => null
+  addRoomMessage: () => null,
+  addRoomMessageReaction: () => null
 };
 
 function ChatContent({
@@ -44,7 +46,8 @@ function ChatContent({
   getRoomMessages,
   rooms,
   userName,
-  addRoomMessage
+  addRoomMessage,
+  addRoomMessageReaction
 }) {
   // load the selected room
   useEffect(() => {
@@ -76,9 +79,11 @@ function ChatContent({
       </section>
       <section className="messages-section">
         <MessageList
+          addRoomMessageReaction={addRoomMessageReaction}
           messages={messages}
           messagesEndRef={messagesEndRef}
           userName={userName}
+          roomId={roomId}
         />
       </section>
       <section className="add-message-section">

@@ -49,6 +49,17 @@ function reducer(state = initialState, action) {
         rooms: mergedRooms2
       };
     }
+    case types.SET_ROOM_MESSAGE_REACTION: {
+      const { roomId, messageId, reaction } = action.payload;
+      const room = state.rooms.find((room) => room.id === roomId);
+      const message = room.messages.find((message) => message.id === messageId);
+      message.reaction = reaction;
+      let mergedRooms2 = arrayMerge(state.rooms, [room]);
+      return {
+        ...state,
+        rooms: mergedRooms2
+      };
+    }
     default:
       return state;
   }
